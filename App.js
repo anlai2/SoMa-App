@@ -1,16 +1,6 @@
-import React from 'react';
-import { AppRegistry, View } from 'react-native';
-import { Header } from './src/components/common';
-import PostList from './src/components/PostList';
+import { AppRegistry } from 'react-native';
+import Home from './src/Home';
 
-//Create a component
-const App = () => (
-  <View style={{ flex: 1 }}>
-  <Header headerText={'SoMa'}/>
-  <PostList />
-  </View>
-);
+AppRegistry.registerComponent('auth', () => Home);
 
-AppRegistry.registerComponent('posts', () => App);
-
-export default App;
+export default Home;

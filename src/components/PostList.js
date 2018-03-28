@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ListView } from 'react-native';
+import { connect } from 'react-redux';
 import PostDetail from './PostDetail';
 
-// Class component
 class PostList extends Component {
-  state = { albums: [] };
   componentWillMount() {
-    // ASYNC HTTP Request to get albums from the API.
-    fetch('https://rallycoding.herokuapp.com/api/music_albums')
-    .then((response) => response.json())
-    .then((responseData) => this.setState({ albums: responseData }));
+    const ds = new ListView.DataSource({ 
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+
+    this.dataSource = ds.cloneWithRows(this.props.posts);
   }
- 
- // Render all the albums that was fetched from the API.
-  renderAlbums() {
-    return this.state.albums.map(album => 
-    	<PostDetail key={album.title} albumProp={album}/>); 
-      //albumProp variable can be named anything as long as we use that name in other functions
+
+  renderRow(post) {
+    return <PostDetail  post={post}/>;
   }
-  
-// Render the component
+
   render() {
     return (
-      <ScrollView>
-        {this.renderAlbums()}
-      </ScrollView>
+      <ListView
+        dataSource={this.dataSource}
+        renderRow={this.renderRow}
+      />
     );
   }
 }
- 
-// Make compomnent available to other parts of the application
-export default PostList;
+
+const mapStateToProps = state => {
+  return { posts: state.posts };
+};
+
+export default connect(mapStateToProps)(PostList);

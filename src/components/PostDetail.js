@@ -1,68 +1,65 @@
-import React from 'react';
-import { Text, View, Image, Linking } from 'react-native';
-import { Card, CardSection, Button} from './common';
+import React, { Component } from 'react';
+import { 
+	Text, 
+	TouchableWithoutFeedback, 
+	View,
+	LayoutAnimation 
+} from 'react-native';
+import { connect } from 'react-redux';
+import { CardSection } from './common';
+import * as actions from '../actions';
 
-const PostDetail = ({ albumProp }) => {
-	//Destructure references for nicer code
-	const { title, artist, thumbnail_image, image, url } = albumProp;
-	const { thumbnailStyle, 
-		headerContentStyle, 
-		thumbnailContainerStyle,
-		headerTextStyle,
-		imageStyle } = styles;
+class PostDetail extends Component {
+	componentWillUpdate() {
+		LayoutAnimation.spring();
+	}
 
-	return (
-		<Card>
-			<CardSection>
-			<View style ={thumbnailContainerStyle}>
-				<Image 
-				style={thumbnailStyle}
-				source={{ uri: thumbnail_image}}
-				/>
-			</View>
-			<View style={headerContentStyle}>
-				<Text style={headerTextStyle}>{title}</Text>
-				<Text>{artist}</Text>
-			</View>
-			</CardSection>
+	renderDescription() {
+		const {post, expanded} = this.props;
 
-			<CardSection>
-				<Image 
-				style={imageStyle}
-				source={{ uri: image}} />
-			</CardSection>
+		if(expanded) {
+			return (
+				<CardSection>
+					<Text style={{ flex: 1 }}> 
+					{post.posttitle}
+					</Text>
+				</CardSection>
+			);
+		}
+	}
 
-			<CardSection>
-				<Button onPress={() => Linking.openURL(url)}>
-					Buy Now
-				</Button>
-			</CardSection>
-		</Card>
-	);
-};
+	render () {
+		const { titleStyle } = styles;
+		const { id, username } = this.props.post;
+
+		return (
+			<TouchableWithoutFeedback
+				onPress={() => this.props.selectPost(id)}
+			>
+				<View>
+					<CardSection>
+						<Text style={ titleStyle }>
+							{ username }
+						</Text>
+					</CardSection>
+					{this.renderDescription()}
+				</View>
+			</TouchableWithoutFeedback>
+		);
+	}
+}
 
 const styles = {
-	headerContentStyle: {
-		flexDirection: 'column',
-		justifyContent: 'space-around'
-	},
-	headerTextStyle: {
-		fontSize: 18
-	},
-	thumbnailStyle: {
-		height: 50,
-		width: 50
-	},
-	thumbnailContainerStyle: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		marginLeft: 10,
-		marginRight: 10
-	},
-	imageStyle: {
-		height: 300,
-		flex: 1, //Tells content to expand as much of the container as possible
-		width: null
+	titleStyle: {
+		fontSize: 18,
+		paddingLeft: 15
 	}
 };
-export default PostDetail;
+
+const mapStateToProps = (state, ownProps) => {
+	const expanded = state.selectedPostId === ownProps.post.id;
+
+	return { expanded }
+};
+
+export default connect(mapStateToProps, actions)(PostDetail);
