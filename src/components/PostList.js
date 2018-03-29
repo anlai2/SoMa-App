@@ -1,33 +1,27 @@
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
-import { connect } from 'react-redux';
-import PostDetail from './PostDetail';
+import { View, Text } from 'react-native';
+import { LinearGradient } from 'expo';
 
 class PostList extends Component {
-  componentWillMount() {
-    const ds = new ListView.DataSource({ 
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-
-    this.dataSource = ds.cloneWithRows(this.props.posts);
-  }
-
-  renderRow(post) {
-    return <PostDetail  post={post}/>;
-  }
-
-  render() {
-    return (
-      <ListView
-        dataSource={this.dataSource}
-        renderRow={this.renderRow}
-      />
-    );
-  }
+	render() {
+		return (
+			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
+				<View>
+					<Text> Post List</Text>
+					<Text> Post List</Text>
+					<Text> Post List</Text>
+					<Text> Post List</Text>
+					<Text> Post List</Text>
+				</View>
+			</LinearGradient>
+			);
+	}
 }
 
-const mapStateToProps = state => {
-  return { posts: state.posts };
+const styles = {
+	backgroundStyle: {
+		flex: 1,
+		backgroundColor: '#7834a8'
+	}
 };
-
-export default connect(mapStateToProps)(PostList);
+export default PostList;

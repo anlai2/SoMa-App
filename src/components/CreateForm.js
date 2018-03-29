@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, createUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
-class LoginForm extends Component {
+class CreateForm extends Component {
 	onEmailChange(text) {
 		this.props.emailChanged(text);
 	}
@@ -17,7 +17,7 @@ class LoginForm extends Component {
 	onButtonPress(){
 		const { email, password } = this.props;
 
-		this.props.loginUser({ email, password });
+		this.props.createUser({ email, password });
 	}
 
 	renderError() {
@@ -39,7 +39,7 @@ class LoginForm extends Component {
 
 		return (
 			<Button onPress={this.onButtonPress.bind(this)}>
-				Login
+				Create Account
 			</Button>
 		);
 	}
@@ -100,5 +100,5 @@ const mapStateToProps = ({auth}) => {
 	};
 };
 export default connect(mapStateToProps, { 
-	emailChanged, passwordChanged, loginUser 
-})(LoginForm);
+	emailChanged, passwordChanged, createUser 
+})(CreateForm);

@@ -5,28 +5,29 @@ import reducers from './reducers';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 import LoginForm from './components/LoginForm';
+import Router from './Router';
 
 class Home extends Component {
 	componentWillMount() {
 		const config = {
-		    apiKey: "AIzaSyD45OuGkOtSohn6TEOKTIfpIH_OLvEU8M8",
-		    authDomain: "manager-cfca6.firebaseapp.com",
-		    databaseURL: "https://manager-cfca6.firebaseio.com",
-		    projectId: "manager-cfca6",
-		    storageBucket: "",
-		    messagingSenderId: "150836461912"
-  };
-  	firebase.initializeApp(config);
-}
+			apiKey: "AIzaSyDOE4qHaObgbGg5fDGAiKb7Opv7ClTD4nw",
+			authDomain: "soma-b8c6f.firebaseapp.com",
+			databaseURL: "https://soma-b8c6f.firebaseio.com",
+			projectId: "soma-b8c6f",
+			storageBucket: "soma-b8c6f.appspot.com",
+			messagingSenderId: "381413117221"
+		};
+		firebase.initializeApp(config);
+	}
 	render() {
 		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 		return (
 			<Provider store={store}>
-				<LoginForm />
+					<Router />
 			</Provider>
-		);
+			);
+		}
 	}
-}
 
-export default Home;
+	export default Home;

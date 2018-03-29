@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { LinearGradient } from 'expo';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
@@ -24,11 +25,11 @@ class LoginForm extends Component {
 		if (this.props.error) {
 			return (
 				<View style={{ backgroundColor: 'white'}}>
-					<Text style={styles.errorTextStyle}>
-					 	{this.props.error}
-					</Text>
+				<Text style={styles.errorTextStyle}>
+				{this.props.error}
+				</Text>
 				</View>
-			);
+				);
 		}
 	}
 
@@ -38,10 +39,10 @@ class LoginForm extends Component {
 		}
 
 		return (
-			<Button onPress={this.onButtonPress.bind(this)}>
-				Login
+			<Button onPress={Actions.login}>
+			Login
 			</Button>
-		);
+			);
 	}
 
 	render(){
@@ -49,28 +50,18 @@ class LoginForm extends Component {
 			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
 				<Card>
 					<CardSection>
-						<Input 
-							label="Email"
-							placeholder="email@gmail.com"
-							onChangeText={this.onEmailChange.bind(this)}
-							value={this.props.email}
-						/>
+						<Button onPress={Actions.createuser}>
+							Create Account
+						</Button>
 					</CardSection>
+
 					<CardSection>
-						<Input
-							secureTextEntry
-							label="Password"
-							placeholder="password"
-							onChangeText={this.onPasswordChange.bind(this)}
-							value={this.props.password}
-						/>
+						<Button onPress={Actions.loginuser}>
+							Login
+						</Button>
 					</CardSection>
 
 					{this.renderError()}
-
-					<CardSection>
-						{this.renderButton()}
-					</CardSection>
 				</Card>
 			</LinearGradient>
 			);
@@ -93,10 +84,10 @@ const mapStateToProps = ({auth}) => {
 	const {email, password, error, loading} = auth;
 
 	return {
-	 	email,
+		email,
 		password,
 		error,
-	 	loading
+		loading
 	};
 };
 export default connect(mapStateToProps, { 
