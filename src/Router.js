@@ -34,7 +34,7 @@ const RouterComponent = () => {
 			    <Scene
 	      			key="mapScreen"
 			      	component={MapScreen}
-			      	title="Choose an Meeting Point"
+			      	title="Drag to a Meeting Point"
 			      	/>
 	      	</Scene>
       	</Stack>

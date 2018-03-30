@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
-import MapView  from 'react-native-maps';
+import { searchCreate, searchStore } from '../actions';
+import MapView, { ProviderPropType, Marker, AnimatedRegion } from 'react-native-maps';
+import { Button, CardSection, Card } from './common';
 
 class MapScreen extends Component {
+  storeLocation(location) {
+    console.log(location.coordinate)
+  }
+
   render() {
     return (
       <MapView
@@ -13,16 +20,24 @@ class MapScreen extends Component {
           latitudeDelta: 0.1922,
           longitudeDelta: 0.1421,
         }}
-        onPress={click => console.log(click.nativeEvent)}
+        showsUserLocation={true}
       >
-        <MapView.Marker
+        <Marker
+          draggable
           coordinate={{
             latitude: 37.78825,
-          longitude: -122.4324
+            longitude: -122.4324
           }}
             title={'Marker Title'}
             description={'Market Description'}
             />
+        <Card>
+          <CardSection>
+            <Button onPress={coor => this.storeLocation(coor.nativeEvent)} >
+              Confirm
+            </Button> 
+          </CardSection>
+        </Card>
       </MapView>
     );
   }
@@ -44,7 +59,20 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    backgroundColor: 'transparent'
   }
 })
 
-export default MapScreen;
+const mapStateToProps = (state) => {
+  const { longitude, latitude } = state.postForm;
+
+  return { longitude, latitude };
+};
+
+export default connect(mapStateToProps, { 
+  searchCreate, searchStore
+})(MapScreen);
