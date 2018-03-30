@@ -6,6 +6,7 @@ import IntroScreen from './components/IntroScreen';
 import CreateForm from './components/CreateForm';
 import PostList from './components/PostList';
 import PostCreate from './components/PostCreate';
+import MapScreen from './components/MapScreen';
 
 const RouterComponent = () => {
   return (
@@ -23,11 +24,18 @@ const RouterComponent = () => {
 	      			rightTitle="Post"
 	      			key="postList"
 			      	component={PostList}
-			      	title="Posts"/>
+			      	title="Posts"
+			      	/>
 			    <Scene
 	      			key="postCreate"
 			      	component={PostCreate}
-			      	title="Create a Post"/>
+			      	title="Create a Post"
+			      	/>
+			    <Scene
+	      			key="mapScreen"
+			      	component={MapScreen}
+			      	title="Choose an Meeting Point"
+			      	/>
 	      	</Scene>
       	</Stack>
     </Router>

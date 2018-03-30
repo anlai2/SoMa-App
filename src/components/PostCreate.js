@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { postUpdate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
+import { Actions } from 'react-native-router-flux';
 
 class PostCreate extends Component {
 	render(){
@@ -26,6 +27,12 @@ class PostCreate extends Component {
 							value={this.props.price}
 							onChangeText={value => this.props.postUpdate({ prop: 'price', value: text })}
 						/>
+					</CardSection>
+
+					<CardSection>
+						<Button onPress={Actions.mapScreen}>
+							Pick Address on Map
+						</Button>
 					</CardSection>
 
 					<CardSection>
