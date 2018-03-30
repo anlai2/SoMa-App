@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { LinearGradient } from 'expo';
+import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import { postUpdate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class PostCreate extends Component {
@@ -12,6 +14,8 @@ class PostCreate extends Component {
 						<Input
 							label="Post Title"
 							placeholder="Post Title"
+							value={this.props.postTitle}
+							onChangeText={value => this.props.postUpdate({ prop: 'postTitle', value: text })}
 						/>
 					</CardSection>
 
@@ -19,6 +23,8 @@ class PostCreate extends Component {
 						<Input
 							label="Price"
 							placeholder="$"
+							value={this.props.price}
+							onChangeText={value => this.props.postUpdate({ prop: 'price', value: text })}
 						/>
 					</CardSection>
 
@@ -39,4 +45,10 @@ const styles = {
 		backgroundColor: '#7834a8'
 	}
 };
-export default PostCreate;
+
+const mapStateToProps = (state) => {
+	const { postTitle, price } = state.postForm;
+
+	return { postTitle, price }
+}
+export default connect(mapStateToProps, { postUpdate })(PostCreate);
