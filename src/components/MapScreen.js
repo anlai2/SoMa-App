@@ -6,38 +6,78 @@ import MapView, { ProviderPropType, Marker, AnimatedRegion } from 'react-native-
 import { Button, CardSection, Card } from './common';
 
 class MapScreen extends Component {
-  storeLocation(location) {
-    console.log(location.coordinate)
+  state = {
+    mapRegion: null,
+    lastLat: null,
+    lastLong: null
   }
 
+  componentDidMount() {
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      let region = {
+        latitude:       position.coords.latitude,
+        longitude:      position.coords.longitude,
+        latitudeDelta:  .5,
+        longitudeDelta: .5
+      }
+      console.log(position.coords.latitude)
+    });
+  }
+
+  onRegionChange(region, lastLat, lastLong) {
+    this.setState({
+      mapRegion: region,
+      // If there are no new values set the current ones
+      lastLat: lastLat || this.state.lastLat,
+      lastLong: lastLong || this.state.lastLong
+    });
+    console.log(this.state.mapRegion)
+  }
+
+  onMapPress(e) {
+    let region = {
+      latitude:       e.nativeEvent.coordinate.latitude,
+      longitude:      e.nativeEvent.coordinate.longitude,
+      latitudeDelta:  0.168,
+      longitudeDelta: 0.1325
+    }
+    console.log('pressed')
+    console.log(this.state.mapRegion)
+    this.onRegionChange(region, region.latitude, region.longitude);
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+
+  confirmButtonPress(loc) {
+    console.log(loc);
+  }
+
+  storeLocation(location) {
+    this.props.searchStore(location)
+  }
   render() {
     return (
       <MapView
         style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.005922,
-          longitudeDelta: 0.005421,
-        }}
+        initialRegion={this.state.mapRegion}
         showsUserLocation={true}
+        followUserLocation={true}
+        onRegionChange={this.onRegionChange.bind(this)}
       >
-        <Marker
-          draggable
-          coordinate={{
-            latitude: 37.78825,
-            longitude: -122.4324
-          }}
+        <MapView.Marker
+          coordinate={this.state.mapRegion}
             title={'Marker Title'}
             description={'Market Description'}
             />
-        <Card>
+
           <CardSection>
-            <Button onPress={coor => this.storeLocation(coor.nativeEvent)} >
+            <Button>
               Confirm
             </Button> 
           </CardSection>
-        </Card>
+
       </MapView>
     );
   }
