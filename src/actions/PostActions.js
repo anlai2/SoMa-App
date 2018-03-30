@@ -22,12 +22,11 @@ export const searchCreate = ({ latitude, longitude }) => {
 	};
 };
 
-export const searchStore =({ latitude, longitude }) => {
+export const searchStore =({ latitude, latitudeDelta, longitude, longitudeDelta }) => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
 	firebase.database().ref(`/users/${currentUser.uid}/post/meetingPoint`)
-		.push({ latitude, longitude })
-		Actions.pop()
+		.push({ latitude, longitude, latitudeDelta, longitudeDelta })
 	};
 };

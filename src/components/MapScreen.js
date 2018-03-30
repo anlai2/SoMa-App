@@ -7,7 +7,12 @@ import { Button, CardSection, Card } from './common';
 
 class MapScreen extends Component {
   state = {
-    mapRegion: null,
+    mapRegion: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta:  .5,
+        longitudeDelta: .5
+      },
     lastLat: null,
     lastLong: null
   }
@@ -31,32 +36,20 @@ class MapScreen extends Component {
       lastLat: lastLat || this.state.lastLat,
       lastLong: lastLong || this.state.lastLong
     });
-    console.log(this.state.mapRegion)
-  }
-
-  onMapPress(e) {
-    let region = {
-      latitude:       e.nativeEvent.coordinate.latitude,
-      longitude:      e.nativeEvent.coordinate.longitude,
-      latitudeDelta:  0.168,
-      longitudeDelta: 0.1325
-    }
-    console.log('pressed')
-    console.log(this.state.mapRegion)
-    this.onRegionChange(region, region.latitude, region.longitude);
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
-  confirmButtonPress(loc) {
-    console.log(loc);
+  confirmButtonPress() {
+    const { mapRegion } = this.state;
+
+    console.log(mapRegion);
+    this.props.searchStore(mapRegion);
+
   }
 
-  storeLocation(location) {
-    this.props.searchStore(location)
-  }
   render() {
     return (
       <MapView
@@ -73,7 +66,7 @@ class MapScreen extends Component {
             />
 
           <CardSection>
-            <Button>
+            <Button onPress={this.confirmButtonPress.bind(this)} >
               Confirm
             </Button> 
           </CardSection>
