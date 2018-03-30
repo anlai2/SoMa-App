@@ -17,8 +17,8 @@ class MapScreen extends Component {
         initialRegion={{
           latitude: 37.78825,
           longitude: -122.4324,
-          latitudeDelta: 0.1922,
-          longitudeDelta: 0.1421,
+          latitudeDelta: 0.005922,
+          longitudeDelta: 0.005421,
         }}
         showsUserLocation={true}
       >
