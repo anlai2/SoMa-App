@@ -1,68 +1,35 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { LinearGradient } from 'expo';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
-class LoginForm extends Component {
-	onEmailChange(text) {
-		this.props.emailChanged(text);
-	}
+const soma_logo = require('../../assets/soma.png');
 
-	onPasswordChange(text){
-		this.props.passwordChanged(text);
-	}
-
-	onButtonPress(){
-		const { email, password } = this.props;
-
-		this.props.loginUser({ email, password });
-	}
-
-	renderError() {
-		if (this.props.error) {
-			return (
-				<View style={{ backgroundColor: 'white'}}>
-				<Text style={styles.errorTextStyle}>
-				{this.props.error}
-				</Text>
-				</View>
-				);
-		}
-	}
-
-	renderButton() {
-		if (this.props.loading) {
-			return <Spinner size="large" />;
-		}
-
-		return (
-			<Button onPress={Actions.login}>
-			Login
-			</Button>
-			);
-	}
-
+class IntroScreen extends Component {
 	render(){
 		return (
+
 			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
-				<Card>
-					<CardSection>
-						<Button onPress={Actions.createuser}>
-							Create Account
-						</Button>
-					</CardSection>
+				<View style={styles.logoContainer}>
+	                <Image style={styles.imageLogo} source={soma_logo} />
+	                <Text style={styles.textLogo}>SoMa </Text>
+	            </View>
+					<Card style={styles.backgroundStyle}>
+						<CardSection>
+							<Button onPress={Actions.createUser}>
+								Create Account
+							</Button>
+						</CardSection>
 
-					<CardSection>
-						<Button onPress={Actions.loginuser}>
-							Login
-						</Button>
-					</CardSection>
-
-					{this.renderError()}
-				</Card>
+						<CardSection>
+							<Button onPress={Actions.loginUser}>
+								Login
+							</Button>
+						</CardSection>
+					</Card>
 			</LinearGradient>
 			);
 	}
@@ -77,7 +44,24 @@ const styles = {
 	backgroundStyle: {
 		flex: 1,
 		backgroundColor: '#7834a8'
-	}
+	},
+	logoContainer: {
+        flex: 1,
+        paddingLeft: 50,
+        paddingRight: 50,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    imageLogo: {
+        height: 150,
+        width: 150
+    },
+    textLogo: {
+        marginTop: 30,
+        color: 'white',
+        fontWeight: "700",
+        fontSize: 40
+    }
 };
 
 const mapStateToProps = ({auth}) => {
@@ -92,4 +76,4 @@ const mapStateToProps = ({auth}) => {
 };
 export default connect(mapStateToProps, { 
 	emailChanged, passwordChanged, loginUser 
-})(LoginForm);
+})(IntroScreen);

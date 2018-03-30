@@ -1,29 +1,35 @@
 import React from 'react';
 import { Linking } from 'react-native';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import IntroScreen from './components/IntroScreen';
 import CreateForm from './components/CreateForm';
 import PostList from './components/PostList';
+import PostCreate from './components/PostCreate';
+
 const RouterComponent = () => {
-	const url = "https://account-sandbox.safetrek.io/authorize?audience=https://api-sandbox.safetrek.io&client_id=gk1nFtbQr4pBpJD0rzAp3vaSi555sm4s&scope=openid%20phone%20offline_access&state=statecode&response_type=code&redirect_uri=http://localhost:3000/callback";
   return (
     <Router>
-    	<Scene key="root" hideNavBar>
+    	<Stack key="root" hideNavBar>
     		<Scene key="auth">
 	    		<Scene key="intro" component={IntroScreen} title="SoMa" initial/>
-	    		<Scene key="createuser" component={CreateForm} title="SoMa" />
-	      		<Scene key="loginuser" component={LoginForm} title="SoMa" />
+	    		<Scene key="createUser" component={CreateForm} title="SoMa" />
+	      		<Scene key="loginUser" component={LoginForm} title="SoMa" />
 	      	</Scene>
+
 	      	<Scene key="main">
 	      		<Scene
-	      			rightTitle="Safetrek"
-	      			onRight={() => Linking.openURL(url)}
-	      			key="postlist"
+	      			onRight={() => Actions.postCreate()}
+	      			rightTitle="Post"
+	      			key="postList"
 			      	component={PostList}
-			      	title="SoMa"/>
+			      	title="Posts"/>
+			    <Scene
+	      			key="postCreate"
+			      	component={PostCreate}
+			      	title="Create a Post"/>
 	      	</Scene>
-      	</Scene>
+      	</Stack>
     </Router>
   );
 };
