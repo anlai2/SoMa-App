@@ -6,6 +6,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+	safeTrek: null,
 	postTitle: '',
 	price: '',
 	address: ''

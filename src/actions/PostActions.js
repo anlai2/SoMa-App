@@ -16,7 +16,7 @@ export const postUpdate = ({ prop, value }) => {
 	};
 };
 
-export const postCreate = ({ postTitle, price, address }) => {
+export const postCreate = ({ safeTrek, postTitle, price, address }) => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
