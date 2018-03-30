@@ -1,5 +1,6 @@
 import {
 	POST_UPDATE,
+	POST_CREATE,
 	SEARCH_CREATE,
 	SEARCH_STORE
 } from '../actions/types';
@@ -7,8 +8,7 @@ import {
 const INITIAL_STATE = {
 	postTitle: '',
 	price: '',
-	latitude: '',
-	longitude: ''
+	address: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,6 +17,8 @@ export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case POST_UPDATE:
 			return { ...state, [action.payload.prop]: action.payload.value }
+		case POST_CREATE:
+			return INITIAL_STATE;
 		case SEARCH_CREATE:
 			console.log(action);
 			return INITIAL_STATE;

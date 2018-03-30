@@ -7,5 +7,7 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER_START = 'login_user_start';
 
 export const POST_UPDATE = 'post_update';
+export const POST_CREATE = 'post_create';
 export const SEARCH_CREATE = 'search_create';
 export const SEARCH_STORE = 'search_store';
+export const MEETING_FETCH_SUCCESS = 'meeting_fetch_success';
