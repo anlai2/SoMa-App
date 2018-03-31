@@ -2,7 +2,8 @@ import {
 	POST_UPDATE,
 	POST_CREATE,
 	SEARCH_CREATE,
-	SEARCH_STORE
+	SEARCH_STORE,
+	MEETING_FETCH_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -27,6 +28,9 @@ export default (state = INITIAL_STATE, action) => {
 		case SEARCH_STORE:
 			console.log(action);
 			return INITIAL_STATE;
+		case MEETING_FETCH_SUCCESS:
+			console.log(action);
+			return action.payload;
 		default:
 			return state;
 	}

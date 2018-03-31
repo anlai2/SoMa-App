@@ -11,3 +11,4 @@ export const POST_CREATE = 'post_create';
 export const SEARCH_CREATE = 'search_create';
 export const SEARCH_STORE = 'search_store';
 export const MEETING_FETCH_SUCCESS = 'meeting_fetch_success';
+export const POST_FETCH_SUCCESS = 'post_fetch_success';

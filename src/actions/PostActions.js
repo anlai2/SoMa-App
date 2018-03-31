@@ -6,7 +6,8 @@ import {
 	SEARCH_CREATE,
 	SEARCH_STORE,
 	FETCH_LOCATION,
-	MEETING_FETCH_SUCCESS
+	MEETING_FETCH_SUCCESS,
+	POST_FETCH_SUCCESS
 } from './types';
 
 export const postUpdate = ({ prop, value }) => {
@@ -50,7 +51,7 @@ export const postCreate = ({ safeTrek, postType, postTitle, price, address }) =>
 			}
 		}else {
 			return (dispatch) => {
-			firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/sell`)
+			firebase.database().ref(`/users/${currentUser.uid}/posts/nonSafeTrek/sell`)
 			.push({ safeTrek, postType, postTitle, price, address })
 			.then(() => {
 				dispatch({ type: POST_CREATE });
@@ -73,19 +74,19 @@ export const searchStore =({ latitude, latitudeDelta, longitude, longitudeDelta 
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
-	firebase.database().ref(`/users/${currentUser.uid}/post/meetingPoint`)
+	firebase.database().ref(`/users/${currentUser.uid}/posts/meetingPoint`)
 		.push({ latitude, longitude, latitudeDelta, longitudeDelta })
 		Actions.pop();
 	};
 };
 
-export const employeesFetch = () => {
+export const postsFetch = () => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
-		firebase.database().ref(`/users/${currentUser.uid}/post/meetingPoint`)
+		firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/buy`)
 			.on('value', snapshot => {
-				dispatch({ type: MEETING_FETCH_SUCCESS, payload: snapshot.val() });
+				dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
 			});
 	};
 };
