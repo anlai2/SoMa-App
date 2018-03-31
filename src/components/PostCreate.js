@@ -33,7 +33,7 @@ class PostCreate extends Component {
 								/>
 							</CardSection>
 
-							<CardSection style={{ flexDirection: 'column' }}>
+							<CardSection>
 								<Text style={styles.pickerTextStyle}>Buy/Sell</Text>
 									<Picker
 									style={{ flex: 1 }}
@@ -73,8 +73,8 @@ class PostCreate extends Component {
 							</CardSection>
 
 							<CardSection>
-								<Button onPress={Actions.cameraScreen}>
-										Camera
+								<Button onPress={Actions.uploadImage}>
+										Upload Image
 								</Button>
 							</CardSection>
 

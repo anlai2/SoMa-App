@@ -7,7 +7,8 @@ import CreateForm from './components/CreateForm';
 import PostList from './components/PostList';
 import PostCreate from './components/PostCreate';
 import MapScreen from './components/MapScreen';
-import CameraScreen from './components/CameraScreen';
+import ImageUploadScreen from './components/ImageUploadScreen';
+import SafeTrekAuthScreen from './components/SafeTrekAuthScreen';
 
 const RouterComponent = () => {
   return (
@@ -40,6 +41,15 @@ const RouterComponent = () => {
 
 	      	<Scene key="main">
 	      		<Scene
+	      			onRight={() => Actions.postList()}
+	      			rightButtonTextStyle={{ color: '#000'}}
+	      			rightTitle="Posts"
+	      			key="safeTrekAuth"
+			      	component={SafeTrekAuthScreen}
+			      	title="SafeTrek Authentication"
+			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      	/>
+	      		<Scene
 	      			onRight={() => Actions.postCreate()}
 	      			rightButtonTextStyle={{ color: '#000'}}
 	      			rightTitle="Post"
@@ -67,8 +77,8 @@ const RouterComponent = () => {
 	    			backButtonTextStyle={{ color: '#000' }}
 			      	/>
 			    <Scene
-			    	key="cameraScreen"
-			    	component={CameraScreen}
+			    	key="uploadImage"
+			    	component={ImageUploadScreen}
 			    	backTitle="Create Post"
 			    	navigationBarStyle={{ backgroundColor: '#009688'}} 
 	      			backButtonImage={require('../assets/back.png')}

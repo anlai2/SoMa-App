@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
+import { Container, Content, Header, Item, Icon, Input, Button } from 'native-base';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class CameraExample extends React.Component {
   state = {
@@ -18,7 +20,7 @@ export default class CameraExample extends React.Component {
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <Text>No Access to Camera</Text>;
     } else {
       return (
         <View style={{ flex: 1 }}>
