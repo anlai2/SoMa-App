@@ -19,15 +19,47 @@ export const postUpdate = ({ prop, value }) => {
 export const postCreate = ({ safeTrek, postType, postTitle, price, address }) => {
 	const { currentUser } = firebase.auth();
 
-	return (dispatch) => {
-	firebase.database().ref(`/users/${currentUser.uid}/posts`)
+	if(safeTrek){
+		if(postType === "Buy"){
+			return (dispatch) => {
+			firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/buy`)
+			.push({ safeTrek, postType, postTitle, price, address })
+			.then(() => {
+				dispatch({ type: POST_CREATE });
+				Actions.pop()
+			});
+		}
+	}else {
+		return (dispatch) => {
+		firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/sell`)
 		.push({ safeTrek, postType, postTitle, price, address })
 		.then(() => {
 			dispatch({ type: POST_CREATE });
 			Actions.pop()
 		});
-	};
-};
+	}};
+	}else{
+		if(postType === "Buy"){
+			return (dispatch) => {
+			firebase.database().ref(`/users/${currentUser.uid}/posts/nonSafeTrek/buy`)
+			.push({ safeTrek, postType, postTitle, price, address })
+			.then(() => {
+				dispatch({ type: POST_CREATE });
+				Actions.pop()
+			});
+			}
+		}else {
+			return (dispatch) => {
+			firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/sell`)
+			.push({ safeTrek, postType, postTitle, price, address })
+			.then(() => {
+				dispatch({ type: POST_CREATE });
+				Actions.pop()
+			});
+			}
+		};
+	}
+}
 
 export const searchCreate = ({ latitude, longitude }) => {
 	return {
