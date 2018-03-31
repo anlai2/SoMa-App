@@ -46,7 +46,7 @@ class LoginForm extends Component {
 
 	render(){
 		return (
-			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
+			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
 				<Card>
 					<CardSection>
 						<Input 
@@ -85,7 +85,7 @@ const styles = {
 	},
 	backgroundStyle: {
 		flex: 1,
-		backgroundColor: '#7834a8'
+		backgroundColor: '#009688'
 	}
 };
 

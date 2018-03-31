@@ -13,9 +13,26 @@ const RouterComponent = () => {
     <Router>
     	<Stack key="root" hideNavBar>
     		<Scene key="auth">
-	    		<Scene key="intro" component={IntroScreen} title="SoMa" initial/>
-	    		<Scene key="createUser" component={CreateForm} title="SoMa" />
-	      		<Scene key="loginUser" component={LoginForm} title="SoMa" />
+	    		<Scene 
+	    			key="intro" 
+	    			component={IntroScreen} 
+	    			title="SoMa" 
+	    			navigationBarStyle={{ backgroundColor: '#009688'}} 
+	    			initial/>
+	    		<Scene 
+	    			key="createUser" 
+	    			component={CreateForm} 
+	    			title="SoMa"
+	    			backTitle="Home"
+	    			navigationBarStyle={{ backgroundColor: '#009688'}}
+	    			backButtonImage={require('../assets/back.png')}
+	    			backButtonTextStyle={{ color: '#000' }}/>
+	      		<Scene 
+	      			key="loginUser" 
+	      			component={LoginForm} 
+	      			title="SoMa"
+	      			backTitle="Home" 
+	      			navigationBarStyle={{ backgroundColor: '#009688'}} />
 	      	</Scene>
 
 	      	<Scene key="main">

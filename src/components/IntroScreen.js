@@ -12,24 +12,19 @@ class IntroScreen extends Component {
 	render(){
 		return (
 
-			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
+			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
 				<View style={styles.logoContainer}>
 	                <Image style={styles.imageLogo} source={soma_logo} />
 	                <Text style={styles.textLogo}>SoMa </Text>
 	            </View>
-					<Card style={styles.backgroundStyle}>
-						<CardSection>
-							<Button onPress={Actions.createUser}>
-								Create Account
-							</Button>
-						</CardSection>
-
-						<CardSection>
-							<Button onPress={Actions.loginUser}>
-								Login
-							</Button>
-						</CardSection>
-					</Card>
+	            <View style={{ flexDirection: 'row' }}>
+					<Button onPress={Actions.createUser}>
+						Create Account
+					</Button>
+					<Button onPress={Actions.loginUser}>
+						Login
+					</Button>
+				</View>
 			</LinearGradient>
 			);
 	}
@@ -43,7 +38,7 @@ const styles = {
 	},
 	backgroundStyle: {
 		flex: 1,
-		backgroundColor: '#7834a8'
+		backgroundColor: '#009688'
 	},
 	logoContainer: {
         flex: 1,
