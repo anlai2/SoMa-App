@@ -51,7 +51,7 @@ class CreateForm extends Component {
 					<CardSection>
 						<Input 
 							label="Email"
-							placeholder="email@gmail.com"
+							placeholder="example@email.com"
 							onChangeText={this.onEmailChange.bind(this)}
 							value={this.props.email}
 						/>

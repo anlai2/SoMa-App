@@ -25,11 +25,12 @@ const styles = {
 	buttonStyle: {
 		flexDirection: 'row',
         justifyContent: 'center',
-        height: 80,
+        height: 60,
         backgroundColor: '#009688',
+        borderColor: '#000',
         alignItems: 'center',
-        paddingLeft: 62,
-        paddingRight: 60,
+        paddingLeft: 75,
+        paddingRight: 75
 	}
 }
 export { Button };

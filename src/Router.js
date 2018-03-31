@@ -7,6 +7,7 @@ import CreateForm from './components/CreateForm';
 import PostList from './components/PostList';
 import PostCreate from './components/PostCreate';
 import MapScreen from './components/MapScreen';
+import CameraScreen from './components/CameraScreen';
 
 const RouterComponent = () => {
   return (
@@ -32,27 +33,47 @@ const RouterComponent = () => {
 	      			component={LoginForm} 
 	      			title="SoMa"
 	      			backTitle="Home" 
-	      			navigationBarStyle={{ backgroundColor: '#009688'}} />
+	      			navigationBarStyle={{ backgroundColor: '#009688'}} 
+	      			backButtonImage={require('../assets/back.png')}
+	    			backButtonTextStyle={{ color: '#000' }}/>
 	      	</Scene>
 
 	      	<Scene key="main">
 	      		<Scene
 	      			onRight={() => Actions.postCreate()}
+	      			rightButtonTextStyle={{ color: '#000'}}
 	      			rightTitle="Post"
 	      			key="postList"
 			      	component={PostList}
 			      	title="Posts"
+			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
 			      	/>
 			    <Scene
 	      			key="postCreate"
 			      	component={PostCreate}
 			      	title="Create a Post"
+			      	backTitle="Posts"
+			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+	      			backButtonImage={require('../assets/back.png')}
+	    			backButtonTextStyle={{ color: '#000' }}
 			      	/>
 			    <Scene
 	      			key="mapScreen"
 			      	component={MapScreen}
 			      	title="Drag to a Meeting Point"
+			      	backTitle="Create Post"
+			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+	      			backButtonImage={require('../assets/back.png')}
+	    			backButtonTextStyle={{ color: '#000' }}
 			      	/>
+			    <Scene
+			    	key="cameraScreen"
+			    	component={CameraScreen}
+			    	backTitle="Create Post"
+			    	navigationBarStyle={{ backgroundColor: '#009688'}} 
+	      			backButtonImage={require('../assets/back.png')}
+	    			backButtonTextStyle={{ color: '#000' }}
+					/>
 	      	</Scene>
       	</Stack>
     </Router>

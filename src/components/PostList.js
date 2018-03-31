@@ -20,7 +20,7 @@ class PostList extends Component {
 
 	render() {
 		return (
-			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
+			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
 				<FlatList
 					data={this.props.posts}
 					renderItem={this.renderRow}

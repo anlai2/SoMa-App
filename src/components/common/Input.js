@@ -36,7 +36,8 @@ const styles = {
 		height: 40,
 		flex: 1, //fills up all space availible and is not sharing w/ any children
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		backgroundColor: '#B2DFDB'
 	}
 };
 export { Input };

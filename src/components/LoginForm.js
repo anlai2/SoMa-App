@@ -38,7 +38,10 @@ class LoginForm extends Component {
 		}
 
 		return (
-			<Button onPress={this.onButtonPress.bind(this)}>
+			<Button 
+			style={styles.loginButtonStyle}
+			onPress={this.onButtonPress.bind(this)}
+			>
 				Login
 			</Button>
 		);
@@ -51,7 +54,7 @@ class LoginForm extends Component {
 					<CardSection>
 						<Input 
 							label="Email"
-							placeholder="email@gmail.com"
+							placeholder="example@email.com"
 							onChangeText={this.onEmailChange.bind(this)}
 							value={this.props.email}
 						/>
@@ -86,6 +89,9 @@ const styles = {
 	backgroundStyle: {
 		flex: 1,
 		backgroundColor: '#009688'
+	},
+	loginButtonStyle: {
+		height: 40
 	}
 };
 

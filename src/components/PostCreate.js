@@ -16,11 +16,11 @@ class PostCreate extends Component {
 
 	render(){
 		return (
-				<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
+				<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
 					<KeyboardAwareScrollView
 				      resetScrollToCoords={{ x: 0, y: 0 }}
 				      contentContainerStyle={styles.container}
-				      scrollEnabled={false}
+				      scrollEnabled={true}
 				    >
 						<Card style={{ 'height': 50000}}>
 							<CardSection>
@@ -73,10 +73,17 @@ class PostCreate extends Component {
 							</CardSection>
 
 							<CardSection>
-								<Button onPress={Actions.mapScreen}>
-									Pick Address on Map
+								<Button onPress={Actions.cameraScreen}>
+										Camera
 								</Button>
 							</CardSection>
+
+							<CardSection>
+								<Button onPress={Actions.mapScreen}>
+										Pick Address on Map
+								</Button>
+							</CardSection>
+
 
 							<CardSection>
 								<Button onPress={this.onPostPress.bind(this)}>

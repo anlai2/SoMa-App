@@ -17,9 +17,9 @@ class IntroScreen extends Component {
 	                <Image style={styles.imageLogo} source={soma_logo} />
 	                <Text style={styles.textLogo}>SoMa </Text>
 	            </View>
-	            <View style={{ flexDirection: 'row' }}>
+	            <View style={styles.authButtonStyle}>
 					<Button onPress={Actions.createUser}>
-						Create Account
+						Sign Up
 					</Button>
 					<Button onPress={Actions.loginUser}>
 						Login
@@ -56,6 +56,10 @@ const styles = {
         color: 'white',
         fontWeight: "700",
         fontSize: 40
+    },
+    authButtonStyle: {
+    	flexDirection: 'row',
+    	justifyContent: 'space-around'
     }
 };
 
