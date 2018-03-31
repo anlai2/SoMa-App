@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { LinearGradient } from 'expo';
 import { connect } from 'react-redux';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, Switch, Picker } from 'react-native';
 import { postUpdate, postCreate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 import { Actions } from 'react-native-router-flux';
 
 class PostCreate extends Component {
 	onPostPress() {
-		const { safeTrek, postTitle, price, address } = this.props;
+		const { safeTrek, postType, postTitle, price, address } = this.props;
 
-		this.props.postCreate({ safeTrek, postTitle, price, address });
+		this.props.postCreate({ safeTrek: safeTrek || false, postType: postType || 'Buy', postTitle, price, address });
 	}
+
 	render(){
 		return (
 			<LinearGradient colors={['#7834a8', '#4c0844']} style={styles.backgroundStyle}>
@@ -26,14 +27,17 @@ class PostCreate extends Component {
 						/>
 					</CardSection>
 
-					<CardSection>
-						<Button>
-							Buy
-						</Button>
-						<Button>
-							Sell
-						</Button>
-					</CardSection>
+					<CardSection style={{ flexDirection: 'column' }}>
+						<Text style={styles.pickerTextStyle}>Buy/Sell</Text>
+							<Picker
+							style={{ flex: 1 }}
+								selectedValue={this.props.postType} 
+								onValueChange={value => this.props.postUpdate({ prop: 'postType', value })}
+							>
+								<Picker.Item label="Buy" value="Buy" />
+								<Picker.Item label="Sell" value="Sell" />
+							</Picker>
+				</CardSection>
 
 					<CardSection>
 						<Input
@@ -90,14 +94,18 @@ const styles = {
 		paddingTop: 5,
 		flex: 1,
 		alignItems: 'center'
+	},
+	pickerTextStyle: {
+		fontSize: 18,
+		paddingLeft: 20
 	}
 };
 
 const mapStateToProps = (state) => {
-	const { safeTrek, postTitle, price, address } = state.postForm;
+	const { safeTrek, postType, postTitle, price, address } = state.postForm;
 
-	return { safeTrek, postTitle, price, address }
+	return { safeTrek, postType, postTitle, price, address }
 }
 export default connect(mapStateToProps, { 
-	postUpdate, postCreate 
+	postUpdate, postCreate
 })(PostCreate);

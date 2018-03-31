@@ -7,6 +7,7 @@ import {
 
 const INITIAL_STATE = {
 	safeTrek: null,
+	postType: '',
 	postTitle: '',
 	price: '',
 	address: ''

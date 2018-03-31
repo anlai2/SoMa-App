@@ -16,12 +16,12 @@ export const postUpdate = ({ prop, value }) => {
 	};
 };
 
-export const postCreate = ({ safeTrek, postTitle, price, address }) => {
+export const postCreate = ({ safeTrek, postType, postTitle, price, address }) => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
 	firebase.database().ref(`/users/${currentUser.uid}/posts`)
-		.push({ postTitle, price, address })
+		.push({ safeTrek, postType, postTitle, price, address })
 		.then(() => {
 			dispatch({ type: POST_CREATE });
 			Actions.pop()
