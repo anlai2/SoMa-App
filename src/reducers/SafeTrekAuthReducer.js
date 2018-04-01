@@ -1,7 +1,7 @@
 import { 
 
 	SAFETREK_AUTH,
-	SAFETREK_UPDATE
+	SAFETREK_UPDATE,
 	 } from '../actions/types';
 
 const INITIAL_STATE = { 

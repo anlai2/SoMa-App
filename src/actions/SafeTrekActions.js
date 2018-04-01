@@ -28,3 +28,19 @@ export const safeTrekAuth = ({ safeTrek, stCode }) => {
 		};
 }
 
+export const safeTrekCheck = () => {
+	const { currentUser } = firebase.auth();
+	return (dispatch) => {
+	firebase.database().ref(`/users/${currentUser.uid}/safeTrekAuth`)
+		.on('value', snapshot => {
+		if(snapshot.val() === null){
+			Actions.stAuth();
+			console.log('stauth screenorino');
+		}
+		else{
+			Actions.main();
+			console.log('main screenorino');
+		}
+		});
+}
+}

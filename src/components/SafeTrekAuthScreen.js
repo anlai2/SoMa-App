@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { AuthSession, LinearGradient } from 'expo';
 import { Card, CardSection, Input, Button, Spinner } from './common';
-import { safeTrekAuth, safeTrekAuthUpdate } from '../actions';
+import { safeTrekAuth, safeTrekAuthUpdate, safeTrekCheck } from '../actions';
 
 class SafeTrekAuthScreen extends React.Component {
   state = {
@@ -15,6 +15,10 @@ class SafeTrekAuthScreen extends React.Component {
     const { safeTrek, stCode } = this.props;
 
     this.props.safeTrekAuth({ safeTrek: true, stCode });
+  }
+
+  componentDidMount() {
+    this.props.safeTrekCheck();
   }
 
   render() {
@@ -66,5 +70,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { 
-  safeTrekAuth, safeTrekAuthUpdate 
+  safeTrekAuth, safeTrekAuthUpdate, safeTrekCheck 
 })(SafeTrekAuthScreen);
