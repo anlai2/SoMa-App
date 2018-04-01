@@ -23,6 +23,7 @@ export const safeTrekAuth = ({ safeTrek, stCode }) => {
 		.push({ safeTrek, stCode })
 		.then(() => {
 			dispatch({ type: SAFETREK_AUTH });
+		Actions.main();
 		})
 		};
 }

@@ -21,9 +21,6 @@ class SafeTrekAuthScreen extends React.Component {
     return (
     <LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
       <View style={styles.container}>
-        <Button onPress={this.authIt.bind(this)}>
-          Auth It!
-        </Button>
         <Button onPress={this._handlePressAsync}>
           SafeTrek Authorization
         </Button>
@@ -45,6 +42,7 @@ class SafeTrekAuthScreen extends React.Component {
     this.setState({ result });
     this.setState({ code: this.state.result.url.substring(this.state.result.url.indexOf('=') + 1, this.state.result.url.indexOf('&'))});
     this.props.safeTrekAuthUpdate({ prop: 'stCode', value: this.state.code });
+    this.authIt()
   };
 }
 

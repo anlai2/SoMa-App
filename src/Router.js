@@ -39,16 +39,19 @@ const RouterComponent = () => {
 	    			backButtonTextStyle={{ color: '#000' }}/>
 	      	</Scene>
 
+	      	<Scene key="stAuth">
+		      	<Scene
+		      			onRight={() => Actions.postList()}
+		      			rightButtonTextStyle={{ color: '#000'}}
+		      			rightTitle="Posts"
+		      			key="safeTrekAuth"
+				      	component={SafeTrekAuthScreen}
+				      	title="SafeTrek Authentication"
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+				      	/>
+		      	</Scene>
+		      	
 	      	<Scene key="main">
-	      		<Scene
-	      			onRight={() => Actions.postList()}
-	      			rightButtonTextStyle={{ color: '#000'}}
-	      			rightTitle="Posts"
-	      			key="safeTrekAuth"
-			      	component={SafeTrekAuthScreen}
-			      	title="SafeTrek Authentication"
-			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-			      	/>
 	      		<Scene
 	      			onRight={() => Actions.postCreate()}
 	      			rightButtonTextStyle={{ color: '#000'}}
