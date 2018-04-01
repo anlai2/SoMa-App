@@ -1,17 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import { AuthSession, LinearGradient } from 'expo';
 import { Card, CardSection, Input, Button, Spinner } from './common';
+import { safeTrekAuth, safeTrekAuthUpdate } from '../actions';
 
-export default class App extends React.Component {
+class SafeTrekAuthScreen extends React.Component {
   state = {
     result: null,
+    code: ''
   };
+
+  authIt() {
+    const { safeTrek, stCode } = this.props;
+
+    this.props.safeTrekAuth({ safeTrek: true, stCode });
+  }
 
   render() {
     return (
     <LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
       <View style={styles.container}>
+        <Button onPress={this.authIt.bind(this)}>
+          Auth It!
+        </Button>
         <Button onPress={this._handlePressAsync}>
           SafeTrek Authorization
         </Button>
@@ -31,6 +43,8 @@ export default class App extends React.Component {
         + `&redirect_uri=${encodeURIComponent(redirectUrl)}`
     });
     this.setState({ result });
+    this.setState({ code: this.state.result.url.substring(this.state.result.url.indexOf('=') + 1, this.state.result.url.indexOf('&'))});
+    this.props.safeTrekAuthUpdate({ prop: 'stCode', value: this.state.code });
   };
 }
 
@@ -45,3 +59,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#7834a8'
   }
 });
+
+const mapStateToProps = (state) => {
+  const { safeTrek, stCode } = state.stAuth;
+
+  return {
+    safeTrek, stCode
+  };
+};
+export default connect(mapStateToProps, { 
+  safeTrekAuth, safeTrekAuthUpdate 
+})(SafeTrekAuthScreen);

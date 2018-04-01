@@ -6,6 +6,9 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER_START = 'login_user_start';
 
+export const SAFETREK_UPDATE = 'safetrek_update';
+export const SAFETREK_AUTH = 'safetrek_auth';
+
 export const POST_UPDATE = 'post_update';
 export const POST_CREATE = 'post_create';
 export const SEARCH_CREATE = 'search_create';
