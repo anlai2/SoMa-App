@@ -40,8 +40,8 @@ class PostCreate extends Component {
 										selectedValue={this.props.postType} 
 										onValueChange={value => this.props.postUpdate({ prop: 'postType', value })}
 									>
-										<Picker.Item label="Buy" value="Buy" />
-										<Picker.Item label="Sell" value="Sell" />
+										<Picker.Item label="Buying" value="Buying" />
+										<Picker.Item label="Selling" value="Selling" />
 									</Picker>
 						</CardSection>
 

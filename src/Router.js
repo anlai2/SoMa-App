@@ -4,7 +4,8 @@ import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import IntroScreen from './components/IntroScreen';
 import CreateForm from './components/CreateForm';
-import PostList from './components/PostList';
+import BuyersList from './components/BuyersList';
+import SellersList from './components/SellersList';
 import PostCreate from './components/PostCreate';
 import MapScreen from './components/MapScreen';
 import ImageUploadScreen from './components/ImageUploadScreen';
@@ -41,26 +42,41 @@ const RouterComponent = () => {
 
 	      	<Scene key="stAuth">
 		      	<Scene
-		      			onRight={() => Actions.postList()}
-		      			rightButtonTextStyle={{ color: '#000'}}
-		      			rightTitle="Posts"
-		      			key="safeTrekAuth"
-				      	component={SafeTrekAuthScreen}
-				      	title="SafeTrek Authentication"
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-				      	/>
-		      	</Scene>
-		      	
-	      	<Scene key="main">
-	      		<Scene
-	      			onRight={() => Actions.postCreate()}
+	      			onRight={() => Actions.main()}
 	      			rightButtonTextStyle={{ color: '#000'}}
-	      			rightTitle="Post"
-	      			key="postList"
-			      	component={PostList}
-			      	title="Posts"
+	      			rightTitle="Posts"
+	      			key="safeTrekAuth"
+			      	component={SafeTrekAuthScreen}
+			      	title="SafeTrek Authentication"
 			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
 			      	/>
+		      	</Scene>
+		      	
+	      	<Scene key="main" hideNavBar>
+		      	<Scene key="buy">
+		      		<Scene
+		      			onRight={() => Actions.postCreate()}
+		      			rightButtonTextStyle={{ color: '#000'}}
+		      			rightTitle="Make Post"
+		      			key="buyList"
+				      	component={BuyersList}
+				      	title="Buy Page"
+				      	renderBackButton={()=>(null)}
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+				      	/>
+				</Scene>
+				<Scene key="sell">
+				    <Scene
+		      			onRight={() => Actions.postCreate()}
+		      			rightButtonTextStyle={{ color: '#000'}}
+		      			rightTitle="Make Post"
+		      			key="sellList"
+				      	component={SellersList}
+				      	title="Sell Page"
+				      	renderBackButton={()=>(null)}
+				      	navigationBarStyle={{ backgroundColor: '#009688'}}
+				      	/>
+			    </Scene>
 			    <Scene
 	      			key="postCreate"
 			      	component={PostCreate}

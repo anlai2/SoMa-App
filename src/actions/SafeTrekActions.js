@@ -35,11 +35,9 @@ export const safeTrekCheck = () => {
 		.on('value', snapshot => {
 		if(snapshot.val() === null){
 			Actions.stAuth();
-			console.log('stauth screenorino');
 		}
 		else{
 			Actions.main();
-			console.log('main screenorino');
 		}
 		});
 }

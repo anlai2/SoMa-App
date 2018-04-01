@@ -1,23 +1,47 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { CardSection } from './common';
+import { CardSection, Card } from './common';
 
 class ListItem extends Component {
 	render() {
-		const { postTitle } = this.props.post.item;
+		const { safeTrek, postType, postTitle, price, address } = this.props.post.item;
 		
 		return (
-			<CardSection>
-				<Text style={styles.titleStyle} >
-					{postTitle}
-				</Text>
-			</CardSection>
+			<Card>
+				<CardSection>
+					<View style={styles.titleStyle}>
+						<Text style={styles.titleTextStyle} >
+							{postType}: {postTitle}
+						</Text>
+					</View>
+				</CardSection>
+
+				<CardSection>
+					<View style={styles.titleStyle}>
+						<Text style={styles.titleTextStyle}>
+							Asking Price: {price}
+						</Text>
+					</View>
+				</CardSection>
+
+				<CardSection>
+					<View style={styles.titleStyle}>
+						<Text style={styles.titleTextStyle} >
+							Preferred Meeting Point: {address}
+						</Text>
+					</View>
+				</CardSection>
+			</Card>
 			);
 	}
 }
 
 const styles = {
 	titleStyle: {
+		flexDirection: 'column',
+		justifyContent: 'space-around'
+	},
+	titleTextStyle: {
 		fontSize: 24,
 		paddingLeft: 15
 	}

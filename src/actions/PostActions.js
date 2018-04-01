@@ -20,10 +20,9 @@ export const postUpdate = ({ prop, value }) => {
 export const postCreate = ({ safeTrek, postType, postTitle, price, address }) => {
 	const { currentUser } = firebase.auth();
 
-	if(safeTrek){
-		if(postType === "Buy"){
+	if(postType === "Buy"){
 			return (dispatch) => {
-			firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/buy`)
+			firebase.database().ref(`/users/${currentUser.uid}/posts/buy`)
 			.push({ safeTrek, postType, postTitle, price, address })
 			.then(() => {
 				dispatch({ type: POST_CREATE });
@@ -32,34 +31,14 @@ export const postCreate = ({ safeTrek, postType, postTitle, price, address }) =>
 		}
 	}else {
 		return (dispatch) => {
-		firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/sell`)
+		firebase.database().ref(`/users/${currentUser.uid}/posts/sell`)
 		.push({ safeTrek, postType, postTitle, price, address })
 		.then(() => {
 			dispatch({ type: POST_CREATE });
 			Actions.pop()
-		});
-	}};
-	}else{
-		if(postType === "Buy"){
-			return (dispatch) => {
-			firebase.database().ref(`/users/${currentUser.uid}/posts/nonSafeTrek/buy`)
-			.push({ safeTrek, postType, postTitle, price, address })
-			.then(() => {
-				dispatch({ type: POST_CREATE });
-				Actions.pop()
-			});
-			}
-		}else {
-			return (dispatch) => {
-			firebase.database().ref(`/users/${currentUser.uid}/posts/nonSafeTrek/sell`)
-			.push({ safeTrek, postType, postTitle, price, address })
-			.then(() => {
-				dispatch({ type: POST_CREATE });
-				Actions.pop()
-			});
-			}
+		})
 		};
-	}
+		};
 }
 
 export const searchCreate = ({ latitude, longitude }) => {
@@ -80,11 +59,22 @@ export const searchStore =({ latitude, latitudeDelta, longitude, longitudeDelta 
 	};
 };
 
-export const postsFetch = () => {
+export const postsFetchBuy = () => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
-		firebase.database().ref(`/users/${currentUser.uid}/posts/safeTrek/buy`)
+		firebase.database().ref(`/users/${currentUser.uid}/posts/buy`)
+			.on('value', snapshot => {
+				dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
+			});
+	};
+};
+
+export const postsFetchSell = () => {
+	const { currentUser } = firebase.auth();
+
+	return (dispatch) => {
+		firebase.database().ref(`/users/${currentUser.uid}/posts/sell`)
 			.on('value', snapshot => {
 				dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
 			});
