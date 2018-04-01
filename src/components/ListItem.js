@@ -42,7 +42,7 @@ const styles = {
 		justifyContent: 'space-around'
 	},
 	titleTextStyle: {
-		fontSize: 24,
+		fontSize: 18,
 		paddingLeft: 15
 	}
 };

@@ -60,49 +60,77 @@ const RouterComponent = () => {
 		      			rightTitle="Make Post"
 		      			key="buyList"
 				      	component={BuyersList}
-				      	title="Buy Page"
+				      	title="Buy"
 				      	renderBackButton={()=>(null)}
 				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
 				      	/>
+			      	<Scene
+		      			key="postCreate"
+				      	component={PostCreate}
+				      	onBack={() => Actions.pop()}
+				      	title="Create a Post"
+				      	backTitle="Buy"
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+				      	/>
+				    <Scene
+		      			key="mapScreen"
+				      	component={MapScreen}
+				      	title="Drag to a Meeting Point"
+				      	backTitle="Back"
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+				      	/>
+				    <Scene
+				    	key="uploadImage"
+				    	component={ImageUploadScreen}
+				    	backTitle="Back"
+				    	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+						/>
 				</Scene>
 				<Scene key="sell">
 				    <Scene
-		      			onRight={() => Actions.postCreate()}
+		      			onRight={() => Actions.postCreateSell()}
 		      			rightButtonTextStyle={{ color: '#000'}}
 		      			rightTitle="Make Post"
 		      			key="sellList"
 				      	component={SellersList}
-				      	title="Sell Page"
+				      	title="Sell"
 				      	renderBackButton={()=>(null)}
 				      	navigationBarStyle={{ backgroundColor: '#009688'}}
 				      	/>
+				  	<Scene
+		      			key="postCreateSell"
+				      	component={PostCreate}
+				      	onBack={() => Actions.pop()}
+				      	title="Create a Post"
+				      	backTitle="Sell"
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+				      	/>
+				    <Scene
+		      			key="mapScreen"
+				      	component={MapScreen}
+				      	title="Drag to a Meeting Point"
+				      	backTitle="Back"
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+				      	/>
+				    <Scene
+				    	key="uploadImage"
+				    	component={ImageUploadScreen}
+				    	backTitle="Back"
+				    	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+						/>
 			    </Scene>
-			    <Scene
-	      			key="postCreate"
-			      	component={PostCreate}
-			      	title="Create a Post"
-			      	backTitle="Posts"
-			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-	      			backButtonImage={require('../assets/back.png')}
-	    			backButtonTextStyle={{ color: '#000' }}
-			      	/>
-			    <Scene
-	      			key="mapScreen"
-			      	component={MapScreen}
-			      	title="Drag to a Meeting Point"
-			      	backTitle="Create Post"
-			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-	      			backButtonImage={require('../assets/back.png')}
-	    			backButtonTextStyle={{ color: '#000' }}
-			      	/>
-			    <Scene
-			    	key="uploadImage"
-			    	component={ImageUploadScreen}
-			    	backTitle="Create Post"
-			    	navigationBarStyle={{ backgroundColor: '#009688'}} 
-	      			backButtonImage={require('../assets/back.png')}
-	    			backButtonTextStyle={{ color: '#000' }}
-					/>
 	      	</Scene>
       	</Stack>
     </Router>
