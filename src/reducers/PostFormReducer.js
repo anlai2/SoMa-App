@@ -11,7 +11,8 @@ const INITIAL_STATE = {
 	postType: '',
 	postTitle: '',
 	price: '',
-	address: ''
+	address: '',
+	imageID: ''
 };
 
 export default (state = INITIAL_STATE, action) => {

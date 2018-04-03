@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linking } from 'react-native';
+import { Linking, Image } from 'react-native';
 import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import IntroScreen from './components/IntroScreen';
@@ -8,8 +8,8 @@ import BuyersList from './components/BuyersList';
 import SellersList from './components/SellersList';
 import PostCreate from './components/PostCreate';
 import MapScreen from './components/MapScreen';
-import ImageUploadScreen from './components/ImageUploadScreen';
 import SafeTrekAuthScreen from './components/SafeTrekAuthScreen';
+import TransactioningScreen from './components/TransactioningScreen';
 
 const RouterComponent = () => {
   return (
@@ -64,6 +64,15 @@ const RouterComponent = () => {
 				      	renderBackButton={()=>(null)}
 				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
 				      	/>
+				    <Scene
+		      			key="transaction"
+				      	component={TransactioningScreen}
+				      	title="Transaction"
+				      	backTitle="Buy"
+				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+		      			backButtonImage={require('../assets/back.png')}
+		    			backButtonTextStyle={{ color: '#000' }}
+				      	/>
 			      	<Scene
 		      			key="postCreate"
 				      	component={PostCreate}
@@ -83,14 +92,6 @@ const RouterComponent = () => {
 		      			backButtonImage={require('../assets/back.png')}
 		    			backButtonTextStyle={{ color: '#000' }}
 				      	/>
-				    <Scene
-				    	key="uploadImage"
-				    	component={ImageUploadScreen}
-				    	backTitle="Back"
-				    	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-						/>
 				</Scene>
 				<Scene key="sell">
 				    <Scene
@@ -122,14 +123,6 @@ const RouterComponent = () => {
 		      			backButtonImage={require('../assets/back.png')}
 		    			backButtonTextStyle={{ color: '#000' }}
 				      	/>
-				    <Scene
-				    	key="uploadImage"
-				    	component={ImageUploadScreen}
-				    	backTitle="Back"
-				    	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-						/>
 			    </Scene>
 	      	</Scene>
       	</Stack>

@@ -17,13 +17,13 @@ export const postUpdate = ({ prop, value }) => {
 	};
 };
 
-export const postCreate = ({ safeTrek, postType, postTitle, price, address }) => {
+export const postCreate = ({ safeTrek, postType, postTitle, price, address, imageID }) => {
 	const { currentUser } = firebase.auth();
 
 	if(postType === "Buy"){
 			return (dispatch) => {
 			firebase.database().ref(`/users/${currentUser.uid}/posts/buy`)
-			.push({ safeTrek, postType, postTitle, price, address })
+			.push({ safeTrek, postType, postTitle, price, address, imageID })
 			.then(() => {
 				dispatch({ type: POST_CREATE });
 				Actions.pop()
@@ -32,7 +32,7 @@ export const postCreate = ({ safeTrek, postType, postTitle, price, address }) =>
 	}else {
 		return (dispatch) => {
 		firebase.database().ref(`/users/${currentUser.uid}/posts/sell`)
-		.push({ safeTrek, postType, postTitle, price, address })
+		.push({ safeTrek, postType, postTitle, price, address, imageID })
 		.then(() => {
 			dispatch({ type: POST_CREATE });
 			Actions.pop()

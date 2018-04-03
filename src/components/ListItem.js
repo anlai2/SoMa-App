@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { CardSection, Card } from './common';
 
 class ListItem extends Component {
 	render() {
-		const { safeTrek, postType, postTitle, price, address } = this.props.post.item;
+		const { safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
 		
 		return (
 			<Card>
@@ -29,6 +29,17 @@ class ListItem extends Component {
 						<Text style={styles.titleTextStyle} >
 							Preferred Meeting Point: {address}
 						</Text>
+					</View>
+				</CardSection>
+				<CardSection>
+					<View>
+			          <Text style={styles.titleTextStyle} >
+							Images: 
+						</Text>
+						<Image 
+						source= {{ uri: imageID }}
+						style={{ width: 250, height: 250 }}
+					 	/>
 					</View>
 				</CardSection>
 			</Card>

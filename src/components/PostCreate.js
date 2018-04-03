@@ -1,17 +1,77 @@
 import React, { Component } from 'react';
-import { LinearGradient } from 'expo';
+import { LinearGradient, Constants, ImagePicker } from 'expo';
 import { connect } from 'react-redux';
 import { View, Text, Switch, Picker, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { postUpdate, postCreate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 import { Actions } from 'react-native-router-flux';
+import * as firebase from 'firebase';
+import uuid from 'uuid';
 
 class PostCreate extends Component {
-	onPostPress() {
-		const { safeTrek, postType, postTitle, price, address } = this.props;
+	state:{
+		id: null
+	}
 
-		this.props.postCreate({ safeTrek: safeTrek || false, postType: postType || 'Buy', postTitle, price, address });
+	onCameraPress = async () => {
+    let result = await ImagePicker.launchCameraAsync();
+
+    if(!result.cancelled){
+      this.uploadImage(result.uri)
+        .then(() => {
+          alert("Success");
+          this.downloadURL()
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  }
+
+  onChooseImagePress = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync();
+
+    if(!result.cancelled){
+      this.uploadImage(result.uri)
+        .then(() => {
+          alert("Success");
+          this.downloadURL()
+        })
+        .catch((error) => {
+          alert(error);
+        });
+  }
+}
+
+  onUploadPress() {
+    const { imageID } = this.props;
+
+    this.props.post({ imageID });
+  }
+
+  uploadImage = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    this.setState({id: uuid.v4()});
+    var ref = firebase.storage().ref().child("images/" + this.state.id);
+    
+    this.props.postUpdate({ prop: 'imageID', value: this.state.id })
+    return ref.put(blob);
+  }
+
+  downloadURL() {
+  	firebase.storage().ref().child("images/" + this.state.id).getDownloadURL()
+  	.then((url) => {
+  		this.props.postUpdate({ prop: 'imageID', value: url})
+  	});
+  }
+
+	onPostPress() {
+		const { safeTrek, postType, postTitle, price, address, imageID } = this.props;
+
+		this.props.postCreate({ safeTrek: safeTrek || false, postType: postType || 'Buy', postTitle, price, address, imageID });
 	}
 
 	render(){
@@ -73,9 +133,15 @@ class PostCreate extends Component {
 							</CardSection>
 
 							<CardSection>
-								<Button onPress={Actions.uploadImage}>
-										Upload Image
-								</Button>
+								<Button onPress={this.onChooseImagePress}>
+						          Choose an Image...
+						        </Button>
+							</CardSection>
+
+							<CardSection>
+								<Button onPress={this.onCameraPress}>
+						          Take a Photo
+						        </Button>
 							</CardSection>
 
 							<CardSection>
@@ -116,9 +182,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-	const { safeTrek, postType, postTitle, price, address } = state.postForm;
+	const { safeTrek, postType, postTitle, price, address, imageID } = state.postForm;
 
-	return { safeTrek, postType, postTitle, price, address }
+	return { safeTrek, postType, postTitle, price, address, imageID }
 }
 export default connect(mapStateToProps, { 
 	postUpdate, postCreate

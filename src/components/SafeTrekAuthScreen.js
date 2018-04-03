@@ -6,9 +6,11 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 import { safeTrekAuth, safeTrekAuthUpdate, safeTrekCheck } from '../actions';
 
 class SafeTrekAuthScreen extends React.Component {
+
+
   state = {
     result: null,
-    code: ''
+    code: ""
   };
 
   authIt() {
@@ -17,14 +19,39 @@ class SafeTrekAuthScreen extends React.Component {
     this.props.safeTrekAuth({ safeTrek: true, stCode });
   }
 
-  componentDidMount() {
-    this.props.safeTrekCheck();
-  }
+  getAccessToken(){
+    var data = {
+        grant_type: "authorization_code", 
+        code: this.state.code, 
+        client_id: "gk1nFtbQr4pBpJD0rzAp3vaSi555sm4s" , 
+        client_secret: "eWTSj_izMvD3nBJFXxkRDZF4aXDGKofYRZyzw_31oer31kuoY6-OVDs27nEHJu0B", 
+        redirect_uri: "https://auth.expo.io/@anlai2/SoMaApp"
+      }
+    console.log(this.state.code);
+    fetch('https://login-sandbox.safetrek.io/oauth/token', {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+    console.log(response);
+  }).catch((error) => {
+    console.log(error);
+    })
+  };
+  //componentDidMount() {
+    //this.props.safeTrekCheck();
+//{
 
   render() {
     return (
     <LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
       <View style={styles.container}>
+        <Button onPress={this.getAccessToken()}>
+          Get Access Token
+        </Button>
         <Button onPress={this._handlePressAsync}>
           SafeTrek Authorization
         </Button>

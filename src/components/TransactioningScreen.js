@@ -4,28 +4,27 @@ import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
 import { emailChanged, passwordChanged, createUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
-import ApiUtils from './ApiUtils';
 
 class CreateForm extends Component {
 	createAlarm(){
-		fetch('https://api-sandbox.safetrek.io/v1')
+		fetch('https://api-sandbox.safetrek.io/v1', {
 		  method: 'POST',
 		  headers: {
-		    'Authorization': 'JPobwWmqpxMG34zz',
+		    'Authorization': 'cvQ0_RQNTByZWrL2',
 		    'Content-Type': 'application/json',
 		  },
-		  body: JSON.stringify({
-		    firstParam: 'yourValue',
-		    secondParam: 'yourOtherValue',
-		  }),
-});
+	}).then((response) => {
+		console.log(response);
+	}).catch((error) => {
+		console.log(error);
+		})
 	}
 	render(){
 		return (
 			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
 				<Card>
 					<CardSection>
-						<Button>
+						<Button onPress={this.createAlarm.bind(this)}>
 							Panic
 						</Button>
 					</CardSection>
