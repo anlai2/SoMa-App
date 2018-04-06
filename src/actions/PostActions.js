@@ -82,6 +82,7 @@ export const postsFetchSell = () => {
 
 export const sendInterest = ({ user, safeTrek, postType, postTitle, price, address, imageID }) => {
 	const { currentUser } = firebase.auth();
+	const userid = currentUser.uid;
 
 	return (dispatch) => {
 		firebase.database().ref(`/interests/` + user)
@@ -94,7 +95,7 @@ export const sendInterest = ({ user, safeTrek, postType, postTitle, price, addre
 }
 
 export const fetchInterestPosts = () => {
-	const { currentUser} = firebase.auth();
+	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
 		firebase.database().ref(`/interests/${currentUser.uid}`)
@@ -123,14 +124,26 @@ export const acceptInterest = ({ user, safeTrek, postType, postTitle, price, add
 			dispatch({ type: SENT_INTEREST })
 			alert('Success')
 		})
-
-		firebase.database().ref(`/transactions/${user}`)
-		.push({ user: userid, safeTrek, postType, postTitle, price, address, imageID })
-		.then(() => {
-			dispatch({ type: SENT_INTEREST })
-			alert('Success')
-		})
-
 	}
+}
 
+export const fetchTransactionPosts = () => {
+	const { currentUser } = firebase.auth();
+
+	return (dispatch) => {
+		firebase.database().ref(`/transactions/${currentUser.uid}`)
+		.on('value', snapshot => {
+			dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
+		});
+	};
+}
+
+export const completeTransaction = () => {
+	const { currentUser } = firebase.auth();
+
+	return (dispatch) => {
+		firebase.database().ref(`/transactions/${currentUser.uid}`)
+		.remove();
+		alert('Success')
+}
 }

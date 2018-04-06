@@ -1,61 +1,50 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
-import { emailChanged, passwordChanged, createUser } from '../actions';
+import { fetchTransactionPosts } from '../actions';
+import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Button, Spinner } from './common';
+import TransactionListItem from './TransactionListItem';
 
-class CreateForm extends Component {
-	createAlarm(){
-		fetch('https://api-sandbox.safetrek.io/v1', {
-		  method: 'POST',
-		  headers: {
-		    'Authorization': 'cvQ0_RQNTByZWrL2',
-		    'Content-Type': 'application/json',
-		  },
-	}).then((response) => {
-		console.log(response);
-	}).catch((error) => {
-		console.log(error);
-		})
+class TransactioningScreen extends Component {
+	componentWillMount(){
+		this.createDataSource();
 	}
-	render(){
+	createDataSource() {
+		this.props.fetchTransactionPosts();
+	}
+	renderRow(post) {
+		return <TransactionListItem post={post} />;
+	}
+
+
+	render() {
 		return (
 			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
-				<Card>
-					<CardSection>
-						<Button onPress={this.createAlarm.bind(this)}>
-							Panic
-						</Button>
-					</CardSection>
-				</Card>
+				<FlatList
+					data={this.props.posts}
+					renderItem={this.renderRow}
+					keyExtractor={post => post.uid}
+				/>
 			</LinearGradient>
 			);
 	}
 }
 
 const styles = {
-	errorTextStyle: {
-		fontSize: 20,
-		alignSelf: 'center',
-		color: 'red'
-	},
 	backgroundStyle: {
 		flex: 1,
-		backgroundColor: '#009688'
+		backgroundColor: '#7834a8'
 	}
 };
 
-const mapStateToProps = ({auth}) => {
-	const {email, password, error, loading} = auth;
+const mapStateToProps = state => {
+	const posts = _.map(state.posts, (val, uid) => {
+		return { ...val, uid };
+	});
 
-	return {
-	 	email,
-		password,
-		error,
-	 	loading
-	};
+	return { posts };
 };
-export default connect(mapStateToProps, { 
-	emailChanged, passwordChanged, createUser 
-})(CreateForm);
+export default connect(mapStateToProps, { fetchTransactionPosts })(TransactioningScreen);

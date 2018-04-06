@@ -2,23 +2,29 @@ import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { CardSection, Card, Button } from './common';
-import { declineInterest, acceptInterest } from '../actions';
+import { completeTransaction } from '../actions';
 
-class InterestListItem extends Component {
-	onAcceptPress() {
+class TransactionListItem extends Component {
+
+	onCompletePress() {
 		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
-		this.props.acceptInterest({ user, safeTrek, postType, postTitle, price, address, imageID })
-		this.props.declineInterest();
-	}
-
-	onDeclinePress() {
-		this.props.declineInterest();
+		this.props.completeTransaction()
 	}
 	render() {
 		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
 		
 		return (
 			<Card>
+				<CardSection>
+					<View style={styles.stButtonStyle}>
+						<Button>
+							Panic
+						</Button>
+						<Button>
+							Danger
+						</Button>
+					</View>
+				</CardSection>
 				<CardSection>
 					<View style={styles.titleStyle}>
 						<Text style={styles.titleTextStyle} >
@@ -64,14 +70,8 @@ class InterestListItem extends Component {
 				</CardSection>
 
 				<CardSection>
-					<Button onPress={() => this.onAcceptPress()}>
-						Accept
-					</Button>
-				</CardSection>
-
-				<CardSection>
-					<Button onPress={() => this.onDeclinePress()}>
-						Decline
+					<Button onPress={() => this.onCompletePress()}>
+						Complete Transaction
 					</Button>
 				</CardSection>
 			</Card>
@@ -87,7 +87,12 @@ const styles = {
 	titleTextStyle: {
 		fontSize: 18,
 		paddingLeft: 15
-	}
+	},
+	stButtonStyle: {
+    	flexDirection: 'row',
+    	justifyContent: 'space-around',
+    	paddingLeft: 15
+    }
 };
 
 const mapStateToProps = (state) => {
@@ -96,5 +101,5 @@ const mapStateToProps = (state) => {
 	return { user, safeTrek, postType, postTitle, price, address, imageID }
 }
 export default connect(mapStateToProps, { 
-	declineInterest, acceptInterest
-})(InterestListItem);
+	completeTransaction
+})(TransactionListItem);
