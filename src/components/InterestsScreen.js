@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
-import { postsFetchSell } from '../actions';
+import { postsFetchSell, fetchInterestPosts } from '../actions';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import ListItem from './ListItem';
 
-class SellersList extends Component {
+class InterestsScreen extends Component {
 	componentWillMount(){
 		this.createDataSource();
 	}
 	createDataSource() {
-		this.props.postsFetchSell();
+		this.props.fetchInterestPosts();
 	}
 	renderRow(post) {
 		return <ListItem post={post} />;
@@ -47,4 +47,4 @@ const mapStateToProps = state => {
 
 	return { posts };
 };
-export default connect(mapStateToProps, { postsFetchSell })(SellersList);
+export default connect(mapStateToProps, { fetchInterestPosts })(InterestsScreen);

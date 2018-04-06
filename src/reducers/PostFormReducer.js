@@ -7,6 +7,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+	user: '',
 	safeTrek: null,
 	postType: '',
 	postTitle: '',

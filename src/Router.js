@@ -10,6 +10,7 @@ import PostCreate from './components/PostCreate';
 import MapScreen from './components/MapScreen';
 import SafeTrekAuthScreen from './components/SafeTrekAuthScreen';
 import TransactioningScreen from './components/TransactioningScreen';
+import InterestsScreen from './components/InterestsScreen';
 
 const RouterComponent = () => {
   return (
@@ -52,79 +53,101 @@ const RouterComponent = () => {
 			      	/>
 		      	</Scene>
 		      	
-	      	<Scene key="main" hideNavBar>
-		      	<Scene key="buy">
-		      		<Scene
-		      			onRight={() => Actions.postCreate()}
-		      			rightButtonTextStyle={{ color: '#000'}}
-		      			rightTitle="Make Post"
-		      			key="buyList"
-				      	component={BuyersList}
-				      	title="Buy"
-				      	renderBackButton={()=>(null)}
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-				      	/>
-				    <Scene
-		      			key="transaction"
-				      	component={TransactioningScreen}
-				      	title="Transaction"
-				      	backTitle="Buy"
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-				      	/>
-			      	<Scene
-		      			key="postCreate"
-				      	component={PostCreate}
-				      	onBack={() => Actions.pop()}
-				      	title="Create a Post"
-				      	backTitle="Buy"
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-				      	/>
-				    <Scene
-		      			key="mapScreen"
-				      	component={MapScreen}
-				      	title="Drag to a Meeting Point"
-				      	backTitle="Back"
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-				      	/>
+	      	<Scene 
+		      	tabs 
+		      	key="main" 
+		      	hideNavBar
+		      	tabBarStyle={{ backgroundColor: '#009688'}}
+		      	labelStyle={{ color: '#FFF'}}
+		      	activeBackgroundColor= "#26A69A"
+		      	lazy
+		      	>
+	      		<Scene key="Buy/Sell" hideNavBar>
+			      	<Scene key="buy">
+			      		<Scene
+			      			onLeft={() => Actions.sell()}
+			      			leftButtonTextStyle={{ color: '#000'}}
+			      			leftTitle="Sell"
+			      			onRight={() => Actions.postCreate()}
+			      			rightButtonTextStyle={{ color: '#000'}}
+			      			rightTitle="Make Post"
+			      			key="buyList"
+					      	component={BuyersList}
+					      	title="Buy"
+					      	renderBackButton={()=>(null)}
+					      	navigationBarStyle={{ backgroundColor: '#009688'}}
+					      	/>
+				      	<Scene
+			      			key="postCreate"
+					      	component={PostCreate}
+					      	onBack={() => Actions.pop()}
+					      	title="Create a Post"
+					      	backTitle="Buy"
+					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      			backButtonImage={require('../assets/back.png')}
+			    			backButtonTextStyle={{ color: '#000' }}
+					      	/>
+					    <Scene
+			      			key="mapScreen"
+					      	component={MapScreen}
+					      	title="Drag to a Meeting Point"
+					      	backTitle="Back"
+					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      			backButtonImage={require('../assets/back.png')}
+			    			backButtonTextStyle={{ color: '#000' }}
+					      	/>
+					</Scene>
+					<Scene key="sell">
+					    <Scene
+					    	onLeft={() => Actions.pop()}
+			      			leftButtonTextStyle={{ color: '#000'}}
+			      			leftTitle="Buy"
+			      			onRight={() => Actions.postCreateSell()}
+			      			rightButtonTextStyle={{ color: '#000'}}
+			      			rightTitle="Make Post"
+			      			key="sellList"
+					      	component={SellersList}
+					      	title="Sell"
+					      	renderBackButton={()=>(null)}
+					      	navigationBarStyle={{ backgroundColor: '#009688'}}
+					      	/>
+					  	<Scene
+			      			key="postCreateSell"
+					      	component={PostCreate}
+					      	onBack={() => Actions.pop()}
+					      	title="Create a Post"
+					      	backTitle="Sell"
+					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      			backButtonImage={require('../assets/back.png')}
+			    			backButtonTextStyle={{ color: '#000' }}
+					      	/>
+					    <Scene
+			      			key="mapScreen"
+					      	component={MapScreen}
+					      	title="Drag to a Meeting Point"
+					      	backTitle="Back"
+					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      			backButtonImage={require('../assets/back.png')}
+			    			backButtonTextStyle={{ color: '#000' }}
+					      	/>
+				    </Scene>
 				</Scene>
-				<Scene key="sell">
-				    <Scene
-		      			onRight={() => Actions.postCreateSell()}
-		      			rightButtonTextStyle={{ color: '#000'}}
-		      			rightTitle="Make Post"
-		      			key="sellList"
-				      	component={SellersList}
-				      	title="Sell"
-				      	renderBackButton={()=>(null)}
-				      	navigationBarStyle={{ backgroundColor: '#009688'}}
-				      	/>
-				  	<Scene
-		      			key="postCreateSell"
-				      	component={PostCreate}
-				      	onBack={() => Actions.pop()}
-				      	title="Create a Post"
-				      	backTitle="Sell"
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-				      	/>
-				    <Scene
-		      			key="mapScreen"
-				      	component={MapScreen}
-				      	title="Drag to a Meeting Point"
-				      	backTitle="Back"
-				      	navigationBarStyle={{ backgroundColor: '#009688'}} 
-		      			backButtonImage={require('../assets/back.png')}
-		    			backButtonTextStyle={{ color: '#000' }}
-				      	/>
-			    </Scene>
-	      	</Scene>
+
+				<Scene 
+					key="Interests"
+					component={InterestsScreen}
+					title="Interests"
+					navigationBarStyle={{ backgroundColor: '#009688'}} 
+					/>
+
+				<Scene
+	      			key="transaction"
+			      	component={TransactioningScreen}
+			      	title="Transaction"
+			      	backTitle="Buy"
+			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      	/>
+				</Scene>
       	</Stack>
     </Router>
   );

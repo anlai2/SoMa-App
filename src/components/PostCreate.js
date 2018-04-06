@@ -29,49 +29,50 @@ class PostCreate extends Component {
     }
   }
 
-  onChooseImagePress = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync();
+	onChooseImagePress = async () => {
+	    let result = await ImagePicker.launchImageLibraryAsync();
 
-    if(!result.cancelled){
-      this.uploadImage(result.uri)
-        .then(() => {
-          alert("Success");
-          this.downloadURL()
-        })
-        .catch((error) => {
-          alert(error);
-        });
-  }
-}
+	    if(!result.cancelled){
+	      this.uploadImage(result.uri)
+	        .then(() => {
+	          alert("Success");
+	          this.downloadURL()
+	        })
+	        .catch((error) => {
+	          alert(error);
+	        });
+	  }
+	}
 
-  onUploadPress() {
-    const { imageID } = this.props;
+	  onUploadPress() {
+	    const { imageID } = this.props;
 
-    this.props.post({ imageID });
-  }
+	    this.props.post({ imageID });
+	 }
 
-  uploadImage = async (uri) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
+	  uploadImage = async (uri) => {
+	    const response = await fetch(uri);
+	    const blob = await response.blob();
 
-    this.setState({id: uuid.v4()});
-    var ref = firebase.storage().ref().child("images/" + this.state.id);
-    
-    this.props.postUpdate({ prop: 'imageID', value: this.state.id })
-    return ref.put(blob);
-  }
+	    this.setState({id: uuid.v4()});
+	    var ref = firebase.storage().ref().child("images/" + this.state.id);
+	    
+	    this.props.postUpdate({ prop: 'imageID', value: this.state.id })
+	    return ref.put(blob);
+	}
 
-  downloadURL() {
-  	firebase.storage().ref().child("images/" + this.state.id).getDownloadURL()
-  	.then((url) => {
-  		this.props.postUpdate({ prop: 'imageID', value: url})
-  	});
-  }
+  	downloadURL() {
+	  	firebase.storage().ref().child("images/" + this.state.id).getDownloadURL()
+	  	.then((url) => {
+	  		this.props.postUpdate({ prop: 'imageID', value: url})
+	  	})
+	}
 
 	onPostPress() {
-		const { safeTrek, postType, postTitle, price, address, imageID } = this.props;
+		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props;
+		const { currentUser } = firebase.auth();
 
-		this.props.postCreate({ safeTrek: safeTrek || false, postType: postType || 'Buy', postTitle, price, address, imageID });
+		this.props.postCreate({ user: currentUser.uid, safeTrek: safeTrek || false, postType: postType || 'Buy', postTitle, price, address, imageID });
 	}
 
 	render(){
@@ -182,9 +183,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-	const { safeTrek, postType, postTitle, price, address, imageID } = state.postForm;
+	const { user, safeTrek, postType, postTitle, price, address, imageID } = state.postForm;
 
-	return { safeTrek, postType, postTitle, price, address, imageID }
+	return { user, safeTrek, postType, postTitle, price, address, imageID }
 }
 export default connect(mapStateToProps, { 
 	postUpdate, postCreate

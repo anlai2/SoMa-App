@@ -7,7 +7,8 @@ import {
 	SEARCH_STORE,
 	FETCH_LOCATION,
 	MEETING_FETCH_SUCCESS,
-	POST_FETCH_SUCCESS
+	POST_FETCH_SUCCESS,
+	SENT_INTEREST
 } from './types';
 
 export const postUpdate = ({ prop, value }) => {
@@ -17,13 +18,11 @@ export const postUpdate = ({ prop, value }) => {
 	};
 };
 
-export const postCreate = ({ safeTrek, postType, postTitle, price, address, imageID }) => {
-	const { currentUser } = firebase.auth();
-
+export const postCreate = ({ user, safeTrek, postType, postTitle, price, address, imageID }) => {
 	if(postType === "Buy"){
-			return (dispatch) => {
-			firebase.database().ref(`/users/${currentUser.uid}/posts/buy`)
-			.push({ safeTrek, postType, postTitle, price, address, imageID })
+		return (dispatch) => {
+			firebase.database().ref(`/posts/buy`)
+			.push({ user, safeTrek, postType, postTitle, price, address, imageID })
 			.then(() => {
 				dispatch({ type: POST_CREATE });
 				Actions.pop()
@@ -31,14 +30,14 @@ export const postCreate = ({ safeTrek, postType, postTitle, price, address, imag
 		}
 	}else {
 		return (dispatch) => {
-		firebase.database().ref(`/users/${currentUser.uid}/posts/sell`)
-		.push({ safeTrek, postType, postTitle, price, address, imageID })
-		.then(() => {
-			dispatch({ type: POST_CREATE });
-			Actions.pop()
-		})
+			firebase.database().ref(`/posts/sell`)
+			.push({ user, safeTrek, postType, postTitle, price, address, imageID })
+			.then(() => {
+				dispatch({ type: POST_CREATE });
+				Actions.pop()
+			})
 		};
-		};
+	};
 }
 
 export const searchCreate = ({ latitude, longitude }) => {
@@ -53,7 +52,7 @@ export const searchStore =({ latitude, latitudeDelta, longitude, longitudeDelta 
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
-	firebase.database().ref(`/users/${currentUser.uid}/posts/meetingPoint`)
+		firebase.database().ref(`/users/${currentUser.uid}/posts/meetingPoint`)
 		.push({ latitude, longitude, latitudeDelta, longitudeDelta })
 		Actions.pop();
 	};
@@ -63,10 +62,10 @@ export const postsFetchBuy = () => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
-		firebase.database().ref(`/users/${currentUser.uid}/posts/buy`)
-			.on('value', snapshot => {
-				dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
-			});
+		firebase.database().ref(`/posts/buy`)
+		.on('value', snapshot => {
+			dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
+		});
 	};
 };
 
@@ -74,9 +73,33 @@ export const postsFetchSell = () => {
 	const { currentUser } = firebase.auth();
 
 	return (dispatch) => {
-		firebase.database().ref(`/users/${currentUser.uid}/posts/sell`)
-			.on('value', snapshot => {
-				dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
-			});
+		firebase.database().ref(`/posts/sell`)
+		.on('value', snapshot => {
+			dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
+		});
 	};
 };
+
+export const sendInterest = ({ user, safeTrek, postType, postTitle, price, address, imageID }) => {
+	const { currentUser } = firebase.auth();
+	const userid = currentUser.uid;
+	return (dispatch) => {
+		firebase.database().ref(`/interests/` + user)
+		.push({ user: userid, safeTrek, postType, postTitle, price, address, imageID })
+		.then(() => {
+			dispatch({ type: SENT_INTEREST })
+			alert('Success')
+		})
+	}
+}
+
+export const fetchInterestPosts = () => {
+	const { currentUser} = firebase.auth();
+
+	return (dispatch) => {
+		firebase.database().ref(`/interests/${currentUser.uid}`)
+		.on('value', snapshot => {
+			dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
+		});
+	};
+}

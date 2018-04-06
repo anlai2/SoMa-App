@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { CardSection, Card, Button } from './common';
-import { sendInterest } from '../actions';
+import { sendTransaction } from '../actions';
 
-class ListItem extends Component {
-	onPressShowInterest() {
+class InterestListItem extends Component {
+	onAcceptPress() {
 		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
-		this.props.sendInterest({ user, safeTrek, postType, postTitle, price, address, imageID })
+		this.props.sendTransaction({ user, safeTrek, postType, postTitle, price, address, imageID })
 	}
 
 	render() {
-		const { safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
+		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
 		
 		return (
 			<Card>
+				<CardSection>
+					<View style={styles.titleStyle}>
+						<Text style={styles.titleTextStyle} >
+							{ user }
+						</Text>
+					</View>
+				</CardSection>
+
 				<CardSection>
 					<View style={styles.titleStyle}>
 						<Text style={styles.titleTextStyle} >
@@ -52,8 +60,11 @@ class ListItem extends Component {
 				</CardSection>
 
 				<CardSection>
-					<Button onPress={() => this.onPressShowInterest()}>
-						Show Interest
+					<Button onPress={() => this.onAcceptPress()}>
+						Accept
+					</Button>
+					<Button onPress={() => this.onDeclinePress()}>
+						Decline
 					</Button>
 				</CardSection>
 			</Card>
@@ -79,4 +90,4 @@ const mapStateToProps = (state) => {
 }
 export default connect(mapStateToProps, { 
 	sendInterest
-})(ListItem);
+})(InterestListItem);

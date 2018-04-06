@@ -16,7 +16,6 @@ class BuyersList extends Component {
 		this.props.postsFetchBuy();
 	}
 	renderRow(post) {
-		console.log(post);
 		return <ListItem post={post} />;
 	}
 
@@ -24,11 +23,8 @@ class BuyersList extends Component {
 	render() {
 		return (
 			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
-				<Button onPress={Actions.transaction}>
-				Transaction
-				</Button>
-				<Button onPress={Actions.sell}>
-				Sell Page
+				<Button onPress={Actions.refresh()}>
+					Refresh
 				</Button>
 				<FlatList
 					data={this.props.posts}
