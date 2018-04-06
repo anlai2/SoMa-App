@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { CardSection, Card, Button } from './common';
-import { sendTransaction } from '../actions';
+import { declineInterest, acceptInterest } from '../actions';
 
 class InterestListItem extends Component {
 	onAcceptPress() {
 		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
-		this.props.sendTransaction({ user, safeTrek, postType, postTitle, price, address, imageID })
+		this.props.acceptInterest({ user, safeTrek, postType, postTitle, price, address, imageID })
+		this.props.declineInterest({ user, safeTrek, postType, postTitle, price, address, imageID })
 	}
 
+	onDeclinePress() {
+		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
+		this.props.declineInterest({ user, safeTrek, postType, postTitle, price, address, imageID })
+	}
 	render() {
 		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
 		
@@ -18,7 +23,7 @@ class InterestListItem extends Component {
 				<CardSection>
 					<View style={styles.titleStyle}>
 						<Text style={styles.titleTextStyle} >
-							{ user }
+							User: { user }
 						</Text>
 					</View>
 				</CardSection>
@@ -63,6 +68,9 @@ class InterestListItem extends Component {
 					<Button onPress={() => this.onAcceptPress()}>
 						Accept
 					</Button>
+				</CardSection>
+
+				<CardSection>
 					<Button onPress={() => this.onDeclinePress()}>
 						Decline
 					</Button>
@@ -89,5 +97,5 @@ const mapStateToProps = (state) => {
 	return { user, safeTrek, postType, postTitle, price, address, imageID }
 }
 export default connect(mapStateToProps, { 
-	sendInterest
+	declineInterest, acceptInterest
 })(InterestListItem);

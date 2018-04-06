@@ -23,7 +23,7 @@ class BuyersList extends Component {
 	render() {
 		return (
 			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
-				<Button onPress={Actions.refresh()}>
+				<Button onPress={() => this.createDataSource.bind()}>
 					Refresh
 				</Button>
 				<FlatList

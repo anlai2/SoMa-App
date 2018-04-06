@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { FlatList, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
-import { postsFetchSell, fetchInterestPosts } from '../actions';
+import { fetchInterestPosts } from '../actions';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Button, Spinner } from './common';
-import ListItem from './ListItem';
+import InterestListItem from './InterestListItem';
 
 class InterestsScreen extends Component {
 	componentWillMount(){
@@ -16,7 +16,7 @@ class InterestsScreen extends Component {
 		this.props.fetchInterestPosts();
 	}
 	renderRow(post) {
-		return <ListItem post={post} />;
+		return <InterestListItem post={post} />;
 	}
 
 

@@ -44,7 +44,7 @@ class SafeTrekAuthScreen extends React.Component {
   
   componentDidMount() {
     this.props.safeTrekCheck();
-  {
+  }
 
   render() {
     return (

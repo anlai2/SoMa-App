@@ -82,7 +82,7 @@ export const postsFetchSell = () => {
 
 export const sendInterest = ({ user, safeTrek, postType, postTitle, price, address, imageID }) => {
 	const { currentUser } = firebase.auth();
-	const userid = currentUser.uid;
+
 	return (dispatch) => {
 		firebase.database().ref(`/interests/` + user)
 		.push({ user: userid, safeTrek, postType, postTitle, price, address, imageID })
@@ -102,4 +102,35 @@ export const fetchInterestPosts = () => {
 			dispatch({ type: POST_FETCH_SUCCESS, payload: snapshot.val() });
 		});
 	};
+}
+
+export const declineInterest = () => {
+	const { currentUser } = firebase.auth();
+
+	return (dispatch) => {
+		firebase.database().ref(`/interests/${currentUser.uid}`)
+		.remove();
+	};
+}
+
+export const acceptInterest = ({ user, safeTrek, postType, postTitle, price, address, imageID }) => {
+	const { currentUser } = firebase.auth();
+	const userid = currentUser.uid;
+	return (dispatch) => {
+		firebase.database().ref(`/transactions/${currentUser.uid}`)
+		.push({ user, safeTrek, postType, postTitle, price, address, imageID })
+		.then(() => {
+			dispatch({ type: SENT_INTEREST })
+			alert('Success')
+		})
+
+		firebase.database().ref(`/transactions/${user}`)
+		.push({ user: userid, safeTrek, postType, postTitle, price, address, imageID })
+		.then(() => {
+			dispatch({ type: SENT_INTEREST })
+			alert('Success')
+		})
+
+	}
+
 }
