@@ -26,8 +26,7 @@ const styles = {
 		flexDirection: 'row',
         justifyContent: 'center',
         height: 60,
-        backgroundColor: '#009688',
-        borderColor: '#000',
+        backgroundColor: '#1537e5',
         alignItems: 'center',
         paddingLeft: 75,
         paddingRight: 75

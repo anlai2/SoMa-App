@@ -23,7 +23,7 @@ class CreateForm extends Component {
 	renderError() {
 		if (this.props.error) {
 			return (
-				<View style={{ backgroundColor: 'white' }}>
+				<View style={{ backgroundColor: '#1573E5' }}>
 					<Text style={styles.errorTextStyle}>
 						{this.props.error}
 					</Text>
@@ -46,8 +46,8 @@ class CreateForm extends Component {
 
 	render() {
 		return (
-			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
-				<Card>
+			<View style={styles.backgroundContainer}>
+				<View style={styles.inputsContatiner}>
 					<CardSection>
 						<Input
 							label="Email"
@@ -65,14 +65,18 @@ class CreateForm extends Component {
 							value={this.props.password}
 						/>
 					</CardSection>
-
-					{this.renderError()}
-
+				</View>
+				<View style={styles.buttonStyle}>
+					<CardSection>
+						{this.renderError()}
+					</CardSection>
+				</View>
+				<View style={styles.buttonStyle}>
 					<CardSection>
 						{this.renderButton()}
 					</CardSection>
-				</Card>
-			</LinearGradient>
+				</View>
+			</View>
 		);
 	}
 }
@@ -83,9 +87,15 @@ const styles = {
 		alignSelf: 'center',
 		color: 'red'
 	},
-	backgroundStyle: {
+	backgroundContainer: {
 		flex: 1,
-		backgroundColor: '#009688'
+		backgroundColor: '#1573E5'
+	},
+	inputsContatiner: {
+		paddingTop: 10
+	},
+	buttonStyle: {
+		alignItems: 'center'
 	}
 };
 

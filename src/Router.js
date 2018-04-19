@@ -20,7 +20,6 @@ const RouterComponent = () => {
 	    		<Scene 
 	    			key="intro" 
 	    			component={IntroScreen} 
-	    			title="SoMa" 
 	    			navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 	    			initial/>
 	    		<Scene 
@@ -59,7 +58,7 @@ const RouterComponent = () => {
 		      	hideNavBar
 		      	tabBarStyle={{ backgroundColor: '#1573E5'}}
 		      	labelStyle={{ color: '#FFF'}}
-		      	activeBackgroundColor= "#26A69A"
+		      	activeBackgroundColor= "#1537e5"
 		      	lazy
 		      	>
 	      		<Scene key="Buy/Sell" hideNavBar>

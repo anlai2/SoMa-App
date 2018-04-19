@@ -20,7 +20,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
 
 const styles = {
 	inputStyle: { //user input space
-		color: '#000',
+		color: '#FFF',
 		paddingRight: 5,
 		paddingLeft: 5,
 		fontSize: 18,
@@ -30,6 +30,7 @@ const styles = {
 	labelStyle: { //"Email" 
 		fontSize: 18,
 		paddingLeft: 20,
+		color: '#FFF',
 		flex: 1 //proportion of space given out of the total flex (3)
 	},
 	containerStyle: {
@@ -37,7 +38,8 @@ const styles = {
 		flex: 1, //fills up all space availible and is not sharing w/ any children
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#B2DFDB'
+		backgroundColor: '#0e4282',
+		borderRadius: 20
 	}
 };
 export { Input };

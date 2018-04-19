@@ -10,11 +10,11 @@ class LoginForm extends Component {
 		this.props.emailChanged(text);
 	}
 
-	onPasswordChange(text){
+	onPasswordChange(text) {
 		this.props.passwordChanged(text);
 	}
 
-	onButtonPress(){
+	onButtonPress() {
 		const { email, password } = this.props;
 
 		this.props.loginUser({ email, password });
@@ -23,9 +23,9 @@ class LoginForm extends Component {
 	renderError() {
 		if (this.props.error) {
 			return (
-				<View style={{ backgroundColor: 'white'}}>
+				<View style={{ backgroundColor: '#1573E5' }}>
 					<Text style={styles.errorTextStyle}>
-					 	{this.props.error}
+						{this.props.error}
 					</Text>
 				</View>
 			);
@@ -38,21 +38,21 @@ class LoginForm extends Component {
 		}
 
 		return (
-			<Button 
-			style={styles.loginButtonStyle}
-			onPress={this.onButtonPress.bind(this)}
+			<Button
+				style={styles.loginButtonStyle}
+				onPress={this.onButtonPress.bind(this)}
 			>
 				Login
 			</Button>
 		);
 	}
 
-	render(){
+	render() {
 		return (
-			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
-				<Card>
+			<View style={styles.backgroundContainer}>
+				<View style={styles.inputsContatiner}>
 					<CardSection>
-						<Input 
+						<Input
 							label="Email"
 							placeholder="example@email.com"
 							onChangeText={this.onEmailChange.bind(this)}
@@ -68,15 +68,19 @@ class LoginForm extends Component {
 							value={this.props.password}
 						/>
 					</CardSection>
-
-					{this.renderError()}
-
+				</View>
+				<View style={styles.buttonStyle}>
+					<CardSection>
+						{this.renderError()}
+					</CardSection>
+				</View>
+				<View style={styles.buttonStyle}>
 					<CardSection>
 						{this.renderButton()}
 					</CardSection>
-				</Card>
-			</LinearGradient>
-			);
+				</View>
+			</View>
+		);
 	}
 }
 
@@ -86,25 +90,28 @@ const styles = {
 		alignSelf: 'center',
 		color: 'red'
 	},
-	backgroundStyle: {
+	backgroundContainer: {
 		flex: 1,
-		backgroundColor: '#009688'
+		backgroundColor: '#1573E5'
 	},
-	loginButtonStyle: {
-		height: 40
+	inputsContatiner: {
+		paddingTop: 10
+	},
+	buttonStyle: {
+		alignItems: 'center'
 	}
 };
 
-const mapStateToProps = ({auth}) => {
-	const {email, password, error, loading} = auth;
+const mapStateToProps = ({ auth }) => {
+	const { email, password, error, loading } = auth;
 
 	return {
-	 	email,
+		email,
 		password,
 		error,
-	 	loading
+		loading
 	};
 };
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
 	emailChanged, passwordChanged, loginUser
 })(LoginForm);

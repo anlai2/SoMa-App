@@ -22,21 +22,20 @@ class TransactioningScreen extends Component {
 
 	render() {
 		return (
-			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
+			<View style={styles.backgroundStyle}>
 				<FlatList
 					data={this.props.posts}
 					renderItem={this.renderRow}
 					keyExtractor={post => post.uid}
 				/>
-			</LinearGradient>
+			</View>
 			);
 	}
 }
 
 const styles = {
 	backgroundStyle: {
-		flex: 1,
-		backgroundColor: '#7834a8'
+		flex: 1
 	}
 };
 

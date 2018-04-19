@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { CardSection, Card, Button } from './common';
+import { CardSection } from './common';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { declineInterest, acceptInterest } from '../actions';
 
 class InterestListItem extends Component {
@@ -19,6 +20,39 @@ class InterestListItem extends Component {
 
 		return (
 			<Card>
+				<CardItem>
+					<Left>
+						<Body>
+							<Text style={styles.titleTextStyle}>{user}</Text>
+							<Text style={styles.titleTextStyle}>{postTitle}</Text>
+							<Text>{"$" + price}</Text>
+						</Body>
+					</Left>
+				</CardItem>
+				<CardItem cardBody>
+					<Image source={{ uri: imageID }} style={{ height: 250, width: 250, flex: 1 }} />
+				</CardItem>
+				<CardItem>
+					<Left>
+						<Button
+							success
+							onPress={() => this.onAcceptPress()}
+						>
+							<Text>Accept</Text>
+						</Button>
+					</Left>
+					<Body>
+						<Button
+							danger
+							onPress={() => this.onDeclinePress()}
+						>
+							<Text>Decline</Text>
+						</Button>
+					</Body>
+				</CardItem>
+			</Card>
+
+			/* <Card>
 				<CardSection>
 					<View style={styles.titleStyle}>
 						<Text style={styles.titleTextStyle} >
@@ -74,7 +108,7 @@ class InterestListItem extends Component {
 						Decline
 					</Button>
 				</CardSection>
-			</Card>
+			</Card> */
 		);
 	}
 }
@@ -85,8 +119,7 @@ const styles = {
 		justifyContent: 'space-around'
 	},
 	titleTextStyle: {
-		fontSize: 18,
-		paddingLeft: 15
+		fontSize: 24
 	}
 };
 

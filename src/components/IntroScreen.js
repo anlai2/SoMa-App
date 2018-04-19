@@ -19,14 +19,14 @@ class IntroScreen extends Component {
 				</View>
 				<View style={styles.buttonContainer}>
 					<TouchableOpacity
+						onPress={Actions.createUser}
+					>
+						<Text style={styles.button}> Sign Up </Text>
+					</TouchableOpacity>
+					<TouchableOpacity
 						onPress={Actions.loginUser}
 					>
 						<Text style={styles.button}> Login </Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={Actions.createUser}
-					>
-						<Text style={styles.button}> Signup </Text>
 					</TouchableOpacity>
 				</View>
 			</View>

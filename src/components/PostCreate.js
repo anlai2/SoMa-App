@@ -10,8 +10,11 @@ import * as firebase from 'firebase';
 import uuid from 'uuid';
 
 class PostCreate extends Component {
-	state:{
-		id: null
+	constructor(props) {
+		super(props);
+		const id = null;
+
+		this.state = { id };
 	}
 
 	onCameraPress = async () => {
@@ -77,7 +80,7 @@ class PostCreate extends Component {
 
 	render(){
 		return (
-				<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
+				<View style={styles.backgroundStyle}>
 					<KeyboardAwareScrollView
 				      resetScrollToCoords={{ x: 0, y: 0 }}
 				      contentContainerStyle={styles.container}
@@ -159,15 +162,14 @@ class PostCreate extends Component {
 							</CardSection>
 						</Card>
 					</KeyboardAwareScrollView>
-				</LinearGradient>
+				</View>
 		);
 	}
 }
 
 const styles = {
 	backgroundStyle: {
-		flex: 1,
-		backgroundColor: '#7834a8'
+		flex: 1
 	},
 	switchTextStyle: {
 		fontSize: 18,

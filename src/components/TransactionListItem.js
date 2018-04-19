@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { CardSection, Card, Button } from './common';
+import { CardSection } from './common';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { completeTransaction } from '../actions';
 
 class TransactionListItem extends Component {
@@ -15,6 +16,31 @@ class TransactionListItem extends Component {
 		
 		return (
 			<Card>
+				<CardItem>
+					<Left>
+						<Body>
+							<Text style={styles.titleTextStyle}>{user}</Text>
+							<Text style={styles.titleTextStyle}>{postTitle}</Text>
+							<Text>{"$" + price}</Text>
+						</Body>
+					</Left>
+				</CardItem>
+				<CardItem cardBody>
+					<Image source={{ uri: imageID }} style={{ height: 250, width: 250, flex: 1 }} />
+				</CardItem>
+				<CardItem>
+					<Body>
+						<Button
+							danger
+							onPress={() => this.onAcceptPress()}
+						>
+							<Text>End Transaction</Text>
+						</Button>
+					</Body>
+				</CardItem>
+			</Card>
+
+			/* <Card>
 				<CardSection>
 					<View style={styles.stButtonStyle}>
 						<Button>
@@ -74,7 +100,7 @@ class TransactionListItem extends Component {
 						Complete Transaction
 					</Button>
 				</CardSection>
-			</Card>
+			</Card> */
 			);
 	}
 }

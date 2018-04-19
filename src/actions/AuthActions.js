@@ -29,6 +29,7 @@ export const createUser = ({ email, password }) => {
 		dispatch({ type: LOGIN_USER_START });
 				firebase.auth().createUserWithEmailAndPassword(email, password)
 					.then(user => createUserSuccess(dispatch, user))
+					.catch(() => createUserFail(dispatch));
 					
 	};
 };
