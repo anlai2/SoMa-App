@@ -16,13 +16,13 @@ class InterestListItem extends Component {
 	}
 	render() {
 		const { user, safeTrek, postType, postTitle, price, address, imageID } = this.props.post.item;
-		
+
 		return (
 			<Card>
 				<CardSection>
 					<View style={styles.titleStyle}>
 						<Text style={styles.titleTextStyle} >
-							User: { user }
+							User: {user}
 						</Text>
 					</View>
 				</CardSection>
@@ -53,13 +53,13 @@ class InterestListItem extends Component {
 
 				<CardSection>
 					<View>
-			          <Text style={styles.titleTextStyle} >
-							Images: 
+						<Text style={styles.titleTextStyle} >
+							Images:
 						</Text>
-						<Image 
-						source= {{ uri: imageID }}
-						style={{ width: 250, height: 250 }}
-					 	/>
+						<Image
+							source={{ uri: imageID }}
+							style={{ width: 250, height: 250 }}
+						/>
 					</View>
 				</CardSection>
 
@@ -75,7 +75,7 @@ class InterestListItem extends Component {
 					</Button>
 				</CardSection>
 			</Card>
-			);
+		);
 	}
 }
 
@@ -95,6 +95,6 @@ const mapStateToProps = (state) => {
 
 	return { user, safeTrek, postType, postTitle, price, address, imageID }
 }
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
 	declineInterest, acceptInterest
 })(InterestListItem);

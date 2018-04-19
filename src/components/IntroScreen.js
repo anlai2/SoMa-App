@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { LinearGradient } from 'expo';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Input, Spinner } from './common';
 
-const soma_logo = require('../../assets/soma.png');
+const soma_logo = require('../../assets/soma1.gif');
 
 class IntroScreen extends Component {
-	render(){
+	render() {
 		return (
 
-			<LinearGradient colors={['#009688', '#B2DFDB']} style={styles.backgroundStyle}>
+			<View style={styles.backgroundStyle}>
 				<View style={styles.logoContainer}>
-	                <Image style={styles.imageLogo} source={soma_logo} />
-	                <Text style={styles.textLogo}>SoMa </Text>
-	            </View>
-	            <View style={styles.authButtonStyle}>
-					<Button onPress={Actions.createUser}>
-						Sign Up
-					</Button>
-					<Button onPress={Actions.loginUser}>
-						Login
-					</Button>
+					<Image style={styles.imageLogo} source={soma_logo} />
+					<Text style={styles.textLogo}>SoMa </Text>
 				</View>
-			</LinearGradient>
-			);
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity
+						onPress={Actions.loginUser}
+					>
+						<Text style={styles.button}> Login </Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={Actions.createUser}
+					>
+						<Text style={styles.button}> Signup </Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+		);
 	}
 }
 
@@ -38,33 +42,41 @@ const styles = {
 	},
 	backgroundStyle: {
 		flex: 1,
-		backgroundColor: '#009688'
+		backgroundColor: '#1573E5'
 	},
 	logoContainer: {
-        flex: 1,
-        paddingLeft: 50,
-        paddingRight: 50,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    imageLogo: {
-        height: 150,
-        width: 150
-    },
-    textLogo: {
-        marginTop: 30,
-        color: 'white',
-        fontWeight: "700",
-        fontSize: 40
-    },
-    authButtonStyle: {
-    	flexDirection: 'row',
-    	justifyContent: 'space-around'
-    }
+		flex: 1,
+		paddingLeft: 50,
+		paddingRight: 50,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	imageLogo: {
+		height: 150,
+		width: 150
+	},
+	textLogo: {
+		marginTop: 30,
+		color: 'white',
+		fontWeight: "700",
+		fontSize: 40
+	},
+	buttonContainer: {
+		flexDirection: 'row',
+		height: 60,
+		width: '100%',
+		justifyContent: 'space-around',
+		padding: 15,
+		backgroundColor: '#1537e5',
+	},
+	button: {
+		fontSize: 20,
+		color: 'white',
+	}
 };
 
-const mapStateToProps = ({auth}) => {
-	const {email, password, error, loading} = auth;
+const mapStateToProps = ({ auth }) => {
+	const { email, password, error, loading } = auth;
 
 	return {
 		email,
@@ -73,6 +85,6 @@ const mapStateToProps = ({auth}) => {
 		loading
 	};
 };
-export default connect(mapStateToProps, { 
-	emailChanged, passwordChanged, loginUser 
+export default connect(mapStateToProps, {
+	emailChanged, passwordChanged, loginUser
 })(IntroScreen);

@@ -9,7 +9,7 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 import InterestListItem from './InterestListItem';
 
 class InterestsScreen extends Component {
-	componentWillMount(){
+	componentWillMount() {
 		this.createDataSource();
 	}
 	createDataSource() {
@@ -29,7 +29,7 @@ class InterestsScreen extends Component {
 					keyExtractor={post => post.uid}
 				/>
 			</LinearGradient>
-			);
+		);
 	}
 }
 

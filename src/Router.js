@@ -21,14 +21,14 @@ const RouterComponent = () => {
 	    			key="intro" 
 	    			component={IntroScreen} 
 	    			title="SoMa" 
-	    			navigationBarStyle={{ backgroundColor: '#009688'}} 
+	    			navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 	    			initial/>
 	    		<Scene 
 	    			key="createUser" 
 	    			component={CreateForm} 
 	    			title="SoMa"
 	    			backTitle="Home"
-	    			navigationBarStyle={{ backgroundColor: '#009688'}}
+	    			navigationBarStyle={{ backgroundColor: '#1573E5'}}
 	    			backButtonImage={require('../assets/back.png')}
 	    			backButtonTextStyle={{ color: '#000' }}/>
 	      		<Scene 
@@ -36,7 +36,7 @@ const RouterComponent = () => {
 	      			component={LoginForm} 
 	      			title="SoMa"
 	      			backTitle="Home" 
-	      			navigationBarStyle={{ backgroundColor: '#009688'}} 
+	      			navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 	      			backButtonImage={require('../assets/back.png')}
 	    			backButtonTextStyle={{ color: '#000' }}/>
 	      	</Scene>
@@ -49,7 +49,7 @@ const RouterComponent = () => {
 	      			key="safeTrekAuth"
 			      	component={SafeTrekAuthScreen}
 			      	title="SafeTrek Authentication"
-			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      	navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 			      	/>
 		      	</Scene>
 		      	
@@ -57,7 +57,7 @@ const RouterComponent = () => {
 		      	tabs 
 		      	key="main" 
 		      	hideNavBar
-		      	tabBarStyle={{ backgroundColor: '#009688'}}
+		      	tabBarStyle={{ backgroundColor: '#1573E5'}}
 		      	labelStyle={{ color: '#FFF'}}
 		      	activeBackgroundColor= "#26A69A"
 		      	lazy
@@ -75,7 +75,7 @@ const RouterComponent = () => {
 					      	component={BuyersList}
 					      	title="Buy"
 					      	renderBackButton={()=>(null)}
-					      	navigationBarStyle={{ backgroundColor: '#009688'}}
+					      	navigationBarStyle={{ backgroundColor: '#1573E5'}}
 					      	/>
 				      	<Scene
 			      			key="postCreate"
@@ -83,7 +83,7 @@ const RouterComponent = () => {
 					      	onBack={() => Actions.pop()}
 					      	title="Create a Post"
 					      	backTitle="Buy"
-					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+					      	navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 			      			backButtonImage={require('../assets/back.png')}
 			    			backButtonTextStyle={{ color: '#000' }}
 					      	/>
@@ -92,7 +92,7 @@ const RouterComponent = () => {
 					      	component={MapScreen}
 					      	title="Drag to a Meeting Point"
 					      	backTitle="Back"
-					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+					      	navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 			      			backButtonImage={require('../assets/back.png')}
 			    			backButtonTextStyle={{ color: '#000' }}
 					      	/>
@@ -109,7 +109,7 @@ const RouterComponent = () => {
 					      	component={SellersList}
 					      	title="Sell"
 					      	renderBackButton={()=>(null)}
-					      	navigationBarStyle={{ backgroundColor: '#009688'}}
+					      	navigationBarStyle={{ backgroundColor: '#1573E5'}}
 					      	/>
 					  	<Scene
 			      			key="postCreateSell"
@@ -117,7 +117,7 @@ const RouterComponent = () => {
 					      	onBack={() => Actions.pop()}
 					      	title="Create a Post"
 					      	backTitle="Sell"
-					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+					      	navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 			      			backButtonImage={require('../assets/back.png')}
 			    			backButtonTextStyle={{ color: '#000' }}
 					      	/>
@@ -126,7 +126,7 @@ const RouterComponent = () => {
 					      	component={MapScreen}
 					      	title="Drag to a Meeting Point"
 					      	backTitle="Back"
-					      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+					      	navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 			      			backButtonImage={require('../assets/back.png')}
 			    			backButtonTextStyle={{ color: '#000' }}
 					      	/>
@@ -137,7 +137,7 @@ const RouterComponent = () => {
 					key="Interests"
 					component={InterestsScreen}
 					title="Interests"
-					navigationBarStyle={{ backgroundColor: '#009688'}} 
+					navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 					/>
 
 				<Scene
@@ -145,7 +145,7 @@ const RouterComponent = () => {
 			      	component={TransactioningScreen}
 			      	title="Transaction"
 			      	backTitle="Buy"
-			      	navigationBarStyle={{ backgroundColor: '#009688'}} 
+			      	navigationBarStyle={{ backgroundColor: '#1573E5'}} 
 			      	/>
 				</Scene>
       	</Stack>
