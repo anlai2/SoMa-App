@@ -39,16 +39,17 @@ class SafeTrekAuthScreen extends React.Component {
     console.log(this.state.code);
     fetch('https://login-sandbox.safetrek.io/oauth/token', {
       method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data)
-    }).then((response) => {
-      this.setState({ tokenResponse: response })
-    }).catch((error) => {
-      console.log(error);
-    })
+    }).then((response) => response.json())
+      .then((data) => this.setState({ tokenResponse: data }))
   };
 
   componentDidMount() {
-    this.props.safeTrekCheck();
+    //this.props.safeTrekCheck();
   }
 
   render() {
@@ -61,9 +62,6 @@ class SafeTrekAuthScreen extends React.Component {
           <Button onPress={this._handlePressAsync}>
             SafeTrek Authorization
       </Button>
-          {this.state.result ? (
-            <Text>{JSON.stringify(this.state.result)}</Text>
-          ) : null}
           {this.state.tokenResponse ? (
             <Text> {JSON.stringify(this.state.tokenResponse)}</Text>
           ) : null}
