@@ -10,6 +10,7 @@ class SafeTrekAuthScreen extends React.Component {
 
   state = {
     result: null,
+    tokenResponse: null,
     code: ""
   };
 
@@ -17,6 +18,14 @@ class SafeTrekAuthScreen extends React.Component {
     const { safeTrek, stCode } = this.props;
 
     this.props.safeTrekAuth({ safeTrek: true, stCode });
+  }
+
+  showResponse(data) {
+    return (
+      <Text>
+        {this.data}
+      </Text>
+    )
   }
 
   getAccessToken() {
@@ -30,13 +39,9 @@ class SafeTrekAuthScreen extends React.Component {
     console.log(this.state.code);
     fetch('https://login-sandbox.safetrek.io/oauth/token', {
       method: 'post',
-      body: JSON.stringify(data),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      body: JSON.stringify(data)
     }).then((response) => {
-      console.log(response);
+      this.setState({ tokenResponse: response })
     }).catch((error) => {
       console.log(error);
     })
@@ -50,7 +55,7 @@ class SafeTrekAuthScreen extends React.Component {
     return (
       <View style={styles.backgroundStyle}>
         <View style={styles.container}>
-          <Button onPress={this.getAccessToken()}>
+          <Button onPress={() => this.getAccessToken()}>
             Get Access Token
       </Button>
           <Button onPress={this._handlePressAsync}>
@@ -58,6 +63,9 @@ class SafeTrekAuthScreen extends React.Component {
       </Button>
           {this.state.result ? (
             <Text>{JSON.stringify(this.state.result)}</Text>
+          ) : null}
+          {this.state.tokenResponse ? (
+            <Text> {JSON.stringify(this.state.tokenResponse)}</Text>
           ) : null}
         </View>
       </View>
@@ -74,7 +82,7 @@ class SafeTrekAuthScreen extends React.Component {
     this.setState({ result });
     this.setState({ code: this.state.result.url.substring(this.state.result.url.indexOf('=') + 1, this.state.result.url.indexOf('&')) });
     this.props.safeTrekAuthUpdate({ prop: 'stCode', value: this.state.code });
-    this.authIt()
+    this.authIt();
   };
 }
 
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   backgroundStyle: {
     flex: 1

@@ -15,5 +15,27 @@
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
-  }
+  },
+  "name": "somaapp",
+  "description": "React Native Application built on Expo that connects sellers/buyers and keeps parties safe with integrated [SafeTrek API](https://docs.safetrek.io/reference#authentication) to ensure parties are safe during transactions. The transaction phase contains a SafeTrek-esque button.",
+  "version": "1.0.0",
+  "devDependencies": {
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anlai2/somaapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anlai2/somaapp/issues"
+  },
+  "homepage": "https://github.com/anlai2/somaapp#readme"
 }
