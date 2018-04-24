@@ -6,7 +6,9 @@ import {
 
 const INITIAL_STATE = { 
 	safeTrek: false,
-	stCode: ''
+	stCode: '',
+	accessToken: 'token not stored',
+	refreshToken: 'token not stored'
 }
 
 export default (state = INITIAL_STATE, action) => {

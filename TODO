@@ -7,7 +7,11 @@ Colors:
 
 -Make better UI
 -Add user profiles
--Test SafeTrek Auth/API
+-Test SafeTrek Auth/API 
+    -Retrive Token (4/21)
+    -Store Token (4/23)
+    -Create Alarm
+    -Update Alarm
 -Fix navigation tabs and when components mount (overhaul rnrf with react-navigation)
 -Redesign posts and what users put in posts
     -Design how posts should look (react-native-elements?)

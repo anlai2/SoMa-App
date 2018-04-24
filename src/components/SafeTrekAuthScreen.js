@@ -6,26 +6,19 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 import { safeTrekAuth, safeTrekAuthUpdate, safeTrekCheck } from '../actions';
 
 class SafeTrekAuthScreen extends React.Component {
+  constructor(props) {
+    super(props);
 
+    const result = null;
+    const code = '';
 
-  state = {
-    result: null,
-    tokenResponse: null,
-    code: ""
-  };
-
-  authIt() {
-    const { safeTrek, stCode } = this.props;
-
-    this.props.safeTrekAuth({ safeTrek: true, stCode });
+    this.state = { result, code };
   }
 
-  showResponse(data) {
-    return (
-      <Text>
-        {this.data}
-      </Text>
-    )
+  authIt() {
+    const { safeTrek, stCode, accessToken, refreshToken } = this.props;
+
+    this.props.safeTrekAuth({ safeTrek: true, stCode, accessToken, refreshToken });
   }
 
   getAccessToken() {
@@ -38,14 +31,18 @@ class SafeTrekAuthScreen extends React.Component {
     }
     console.log(this.state.code);
     fetch('https://login-sandbox.safetrek.io/oauth/token', {
-      method: 'post',
+      method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data)
     }).then((response) => response.json())
-      .then((data) => this.setState({ tokenResponse: data }))
+      .then((responseData) => {
+        this.props.safeTrekAuthUpdate({ prop: 'accessToken', value: responseData.access_token });
+        this.props.safeTrekAuthUpdate({ prop: 'refreshToken', value: responseData.refresh_token });
+        this.authIt();
+      });
   };
 
   componentDidMount() {
@@ -56,15 +53,12 @@ class SafeTrekAuthScreen extends React.Component {
     return (
       <View style={styles.backgroundStyle}>
         <View style={styles.container}>
-          <Button onPress={() => this.getAccessToken()}>
-            Get Access Token
-      </Button>
           <Button onPress={this._handlePressAsync}>
             SafeTrek Authorization
-      </Button>
-          {this.state.tokenResponse ? (
-            <Text> {JSON.stringify(this.state.tokenResponse)}</Text>
-          ) : null}
+        </Button>
+{/*           {this.state.tokenResponse ? (
+            <Text> {JSON.stringify(this.state.)}</Text>
+          ) : null} */}
         </View>
       </View>
     );
@@ -80,7 +74,8 @@ class SafeTrekAuthScreen extends React.Component {
     this.setState({ result });
     this.setState({ code: this.state.result.url.substring(this.state.result.url.indexOf('=') + 1, this.state.result.url.indexOf('&')) });
     this.props.safeTrekAuthUpdate({ prop: 'stCode', value: this.state.code });
-    this.authIt();
+
+    this.getAccessToken();
   };
 }
 
@@ -96,10 +91,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { safeTrek, stCode } = state.stAuth;
+  const { safeTrek, stCode, accessToken, refreshToken } = state.stAuth;
 
   return {
-    safeTrek, stCode
+    safeTrek, stCode, accessToken, refreshToken
   };
 };
 export default connect(mapStateToProps, {
