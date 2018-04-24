@@ -23,6 +23,11 @@ class ListItem extends Component {
 							<Text>{"$" + price}</Text>
 						</Body>
 					</Left>
+					<Right>
+						<Body>
+							<Text>Test</Text>
+						</Body>
+					</Right>
 				</CardItem>
 				<CardItem cardBody>
 					<Image source={{ uri: imageID }} style={{ height: 250, width: 250, flex: 1 }} />

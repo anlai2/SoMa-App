@@ -54,37 +54,30 @@ const RouterComponent = () => {
 
 				<Scene
 					tabs
+					//tabBarOnPress={() => Actions.refresh()}
 					key="main"
 					hideNavBar
 					tabBarStyle={{ backgroundColor: '#1573E5' }}
 					labelStyle={{ color: '#FFF' }}
 					activeBackgroundColor="#1537e5"
-					lazy
 				>
-					<Scene key="Buy/Sell" hideNavBar>
-						<Scene key="buy">
+					<Scene key="Home"
+						hideNavBar
+						tabs
+						tabBarPosition="top"
+						tabBarStyle={{ paddingTop: 25 }}
+						//tabBarOnPress={() => Actions.refresh()}
+					>
+						<Scene key="buy" hideNavBar>
 							<Scene
-								onLeft={() => Actions.sell()}
-								leftButtonTextStyle={{ color: '#000' }}
-								leftTitle="Sell"
 								onRight={() => Actions.postCreate()}
 								rightButtonTextStyle={{ color: '#000' }}
 								rightTitle="Make Post"
 								key="buyList"
 								component={BuyersList}
-								title="Buy"
+								title="Home"
 								renderBackButton={() => (null)}
 								navigationBarStyle={{ backgroundColor: '#1573E5' }}
-							/>
-							<Scene
-								key="postCreate"
-								component={PostCreate}
-								onBack={() => Actions.pop()}
-								title="Create a Post"
-								backTitle="Buy"
-								navigationBarStyle={{ backgroundColor: '#1573E5' }}
-								backButtonImage={require('../assets/back.png')}
-								backButtonTextStyle={{ color: '#000' }}
 							/>
 							<Scene
 								key="mapScreen"
@@ -96,7 +89,7 @@ const RouterComponent = () => {
 								backButtonTextStyle={{ color: '#000' }}
 							/>
 						</Scene>
-						<Scene key="sell">
+						<Scene key="sell" hideNavBar>
 							<Scene
 								onLeft={() => Actions.pop()}
 								leftButtonTextStyle={{ color: '#000' }}
@@ -106,7 +99,7 @@ const RouterComponent = () => {
 								rightTitle="Make Post"
 								key="sellList"
 								component={SellersList}
-								title="Sell"
+								title="Home"
 								renderBackButton={() => (null)}
 								navigationBarStyle={{ backgroundColor: '#1573E5' }}
 							/>
@@ -145,6 +138,16 @@ const RouterComponent = () => {
 						title="Transaction"
 						backTitle="Buy"
 						navigationBarStyle={{ backgroundColor: '#1573E5' }}
+					/>
+					<Scene
+						key="postCreate"
+						component={PostCreate}
+						onBack={() => Actions.pop()}
+						title="Create a Post"
+						backTitle="Buy"
+						navigationBarStyle={{ backgroundColor: '#1573E5' }}
+						backButtonImage={require('../assets/back.png')}
+						backButtonTextStyle={{ color: '#000' }}
 					/>
 				</Scene>
 			</Stack>

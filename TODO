@@ -6,6 +6,10 @@ Colors:
 *Post Create UI
 
 -Make better UI
+    -Post Create
+        -Use flow for post create (title,price,address)(images)(contact info)
+    -Buy/Sell Posts
+    -Transaction (Add Maps)
 -Add user profiles
 -Test SafeTrek Auth/API 
     -Retrive Token (4/21)
