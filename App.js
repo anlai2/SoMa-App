@@ -1,6 +1,11 @@
-import { AppRegistry } from 'react-native';
-import Home from './src/Home';
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
-AppRegistry.registerComponent('auth', () => Home);
-
-export default Home;
+export default class App extends Component {
+    render() {
+        <View>
+            <Text>Home Screen</Text>
+        </View>
+    }
+}
