@@ -1,0 +1,25 @@
+Colors: 
+    main: 1573E5
+    buttons: 1537e5
+    input: 0e4282
+    
+*Post Create UI
+
+-Make better UI
+    -Post Create
+        -Use flow for post create (title,price,address)(images)(contact info)
+    -Buy/Sell Posts
+    -Transaction (Add Maps)
+-Add user profiles
+-Test SafeTrek Auth/API 
+    -Retrive Token (4/21)
+    -Store Token (4/23)
+    -Create Alarm
+    -Update Alarm
+-Fix navigation tabs and when components mount (overhaul rnrf with react-navigation)
+-Redesign posts and what users put in posts
+    -Design how posts should look (react-native-elements?)
+    -Implement reverse geocoding or yelp api for closest safe places
+    -Multiple images for albums style like tinder
+    -Twillio for texting/messaging
+    -Add ignore button to interests item

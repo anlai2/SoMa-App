@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
 import { emailChanged, passwordChanged, createUser } from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from '../components';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
-class CreateAuthScreen extends Component {
+class CreateForm extends Component {
 	onEmailChange(text) {
 		this.props.emailChanged(text);
 	}
@@ -89,12 +89,10 @@ const styles = {
 	},
 	backgroundContainer: {
 		flex: 1,
-		backgroundColor: '#1573E5',
-		justifyContent: 'flex-start'
+		backgroundColor: '#1573E5'
 	},
 	inputsContatiner: {
-		paddingTop: 10,
-        marginTop: 75
+		paddingTop: 10
 	},
 	buttonStyle: {
 		alignItems: 'center'
@@ -113,4 +111,4 @@ const mapStateToProps = ({ auth }) => {
 };
 export default connect(mapStateToProps, {
 	emailChanged, passwordChanged, createUser
-})(CreateAuthScreen);
+})(CreateForm);
