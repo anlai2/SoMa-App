@@ -14,7 +14,8 @@
     "react-navigation": "^1.5.11",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "uuid": "^3.2.1"
   },
   "name": "somaapp",
   "description": "React Native Application built on Expo that connects sellers/buyers and keeps parties safe with integrated [SafeTrek API](https://docs.safetrek.io/reference#authentication) to ensure parties are safe during transactions. The transaction phase contains a SafeTrek-esque button.",
