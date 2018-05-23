@@ -20,10 +20,12 @@
   "description": "React Native Application built on Expo that connects sellers/buyers and keeps parties safe with integrated [SafeTrek API](https://docs.safetrek.io/reference#authentication) to ensure parties are safe during transactions. The transaction phase contains a SafeTrek-esque button.",
   "version": "1.0.0",
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-react": "^7.8.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
