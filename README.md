@@ -12,8 +12,10 @@
 ## Features
 
 - Users can post sell/buy posts to sell their junk with profile ratings, transaction location, and SafeTrek API integration.
+
 - With SafeTrek, users will have a peace of mind while making transactions with strangers, having emergency responses with a 
-push of a button
+push of a button.
+
 -SoMa also allows users to purchase items online safely with certified SafeTrek user profiles.
 
 ### Screenshots
