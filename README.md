@@ -31,26 +31,31 @@ More screenshots to come!
 
 Many issues that will occur will be opened on this github page, below are milestones/enhancements
 
+- [ ] Redesign app for better design and functionality
+  - [ ] Decide which features to keep and not keep 
+  - [ ] Profiles or Anonymity
+  - [ ] Buy/Sell or only Buy 
+  - [ ] Transaction Page Features
+  - [ ] Display mockup here 
+  
+- [ ] Create a backend for easier web app integration
+  - [ ] Implement REST API to store posts and profiles with MongoDB
+  - [ ] Detach from firebase use
+  - [ ] Handle SafeTrek auth when users sign up and login, each login should request a new access token
+  
 - [ ] RNRF to React-Navigation
-  - Use createBottomTabNavigator to route through news, portfolio, and dashboard screens.
+  - Use createBottomTabNavigator to route through buy/sell pages
 
-- [x] API’s used
-  * [CoinMarketCap.com API](https://coinmarketcap.com/api/documentation/v1/) for latest coin prices
-  * [Twilio API](https://www.twilio.com/docs/api) for OTP authentication 
-  * [Crypto Coins News API](https://newsapi.org/s/crypto-coins-news-api) for latest cryptocurrency news
+- [ ] API’s used
+  * [SafeTrek API](https://docs.safetrek.io/reference#create-verification) to dispatch emergency response (Sandbox)
+  * [Yelp API](https://www.yelp.com/developers/documentation/v3) for nearby safe places (malls, coffee shops, ...)
 
 - [ ] Start building prototype
-  - [ ] Fix android UI design bugs
   - [ ] Get feedback
   - [ ] Prepare deployment to stores (Due by 08/27/18)
 
-- [ ] Create a React Web App with a similiar backend 
-  - [ ] Move from firebase to MongoDB
-  - [ ] Create REST API for backend use (GET/POST/DELETE portfolio)
-  
-- [ ] Add visualization data such as graphs and pie charts using historical data.
-  - [ ] Move CMC.com API to a more advanced API that has live and historical prices.
-  - [ ] Requires a backend and database
+- [ ] Create a React Web App
+
 
 ## Feedback
 
