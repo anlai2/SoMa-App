@@ -16,7 +16,7 @@
 - With SafeTrek, users will have a peace of mind while making transactions with strangers, having emergency responses with a 
 push of a button.
 
--SoMa also allows users to purchase items online safely with certified SafeTrek user profiles.
+- SoMa also allows users to purchase items online safely with certified SafeTrek user profiles.
 
 ### Screenshots
 
